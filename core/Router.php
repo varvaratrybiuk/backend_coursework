@@ -1,6 +1,8 @@
 <?php
 
 namespace core;
+use controllers\ErrorController;
+
 class Router
 {
     private array $routes = [
@@ -55,7 +57,8 @@ class Router
         $method = $_SERVER['REQUEST_METHOD'];
         $route = $this->matchRoute($uri, $method);
         if (!$route || !$this->isRouteExist($route)) {
-            $this->error(404);
+            $error = new ErrorController();
+            $error->errorPage(404);
         }
         $this->executeRoute($route);
     }
@@ -84,7 +87,8 @@ class Router
             }
         }
         catch (\Throwable $e) {
-            $this->error(500);
+            $error = new ErrorController();
+            $error->errorPage(500);
         }
     }
     private function matchRoute(string $uri, string $method): ?array
@@ -95,13 +99,6 @@ class Router
             }
         }
         return null;
-    }
-
-    //Перенести в окремий клас
-    private function error(int $code = 404): void
-    {
-        http_response_code($code);
-        die();
     }
     public function getRoutes() : array
     {

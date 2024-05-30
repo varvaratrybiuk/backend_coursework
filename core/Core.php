@@ -4,14 +4,23 @@ namespace core;
 class Core extends Singleton
 {
     private Router $router;
+    private DataBase $db;
     protected function __construct() {
         parent::__construct();
+        $dataBaseConfiguration = Config::readAndGet('config/database.php');
+        $this->db = new DataBase($dataBaseConfiguration["dbHost"], $dataBaseConfiguration["dbName"],
+            $dataBaseConfiguration["dbLogin"], $dataBaseConfiguration["dbPassword"]);
         $this->router = new Router();
     }
-    public function setRoutes(Router $somerouter): void
+    public function getDataBaseObj(): DataBase
     {
-        $this->router->addRoutes($somerouter);
+        return $this->db;
     }
+    public function setRoutes(Router $someRouter): void
+    {
+        $this->router->addRoutes($someRouter);
+    }
+
     public function run(): void
     {
         $this->router->run();
