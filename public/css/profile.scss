@@ -1,0 +1,12 @@
+@import "login_reg_style";
+.menu-container{
+  display: flex;
+  flex-direction: row;
+}
+.user-menu > a{
+  background: #D3A69B;
+  border: 1px solid #8a6a61;
+}
+.menu-container > .user-menu{
+  align-self: center;
+}

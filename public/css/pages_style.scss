@@ -1,0 +1,45 @@
+@mixin page-styles($backgroundСolor, $items-color, $hover-color, $font, $imgColor) {
+  body {
+    background: $backgroundСolor !important;
+    color: $font !important;
+  }
+  .navbar {
+    background-color: $items-color;
+  }
+  .navbar > .container-fluid > .navbar-brand{
+    color: $font !important;
+  }
+  .nav-item:hover {
+    background-color:  fade-out($hover-color, 0.40);
+    border-radius: 7px;
+  }
+  .nav-item > .dropdown-menu {
+    background-color: $hover-color;
+    border:  darken($hover-color, 5%);
+  }
+
+  .nav-link.active,
+  .dropdown-item {
+    color: $font !important;
+  }
+  .nav-item > .dropdown-menu .dropdown-item:hover,
+  .nav-item > .dropdown-menu .dropdown-item:focus,
+  .nav-item > .dropdown-menu .dropdown-item:active {
+    background-color: $items-color;
+  }
+  .nav-item img {
+    filter: invert($imgColor);
+  }
+  .footer {
+    background-color: fade-out($items-color, 0.20);
+  }
+  .card > .card-body{
+    background:  $font
+  }
+  .card > .card-body > a {
+    background-color: $items-color;
+  }
+  .card > .carousel > .carousel-inner {
+    border-radius: 5px 5px 0 0;
+  }
+}

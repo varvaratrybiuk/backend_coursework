@@ -1,0 +1,35 @@
+@import "main_page_style";
+.form-container .form-field > div > input {
+  border: none;
+  border-bottom: 2px solid rgba(129, 97, 90, 0.44);
+  border-radius: 2px;
+  background: none;
+}
+
+.form-container .form-field > div > input:focus {
+  outline: none;
+}
+
+.form-container .form-field > div {
+  margin: 5px;
+}
+
+.form-container .form-field button {
+  border-radius: 3px;
+  background: #D3A69B;
+  border: 1px solid rgba(129, 97, 90, 0.44);
+}
+
+.form-container {
+  border: 2px solid #443d38;
+  padding: 20px;
+  border-radius: 10px;
+  margin: 20px;
+}
+.form-container .error {
+  color: darkred;
+  border-radius: 2px;
+}
+.content{
+  width: max-content !important;
+}

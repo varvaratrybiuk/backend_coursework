@@ -24,6 +24,7 @@ class DataBase
         $dsn = "mysql:host=" . $host . ";dbname=" . $dbname;
         try {
             $this->pdo = new PDO($dsn, $username, $password);
+
         } catch (\Throwable) {
             $error = new ErrorController();
             $error->errorPage(500);

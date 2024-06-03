@@ -1,0 +1,40 @@
+body {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  --bs-body-font-family: LXGW WenKai Mono TC;
+}
+
+.navbar {
+  border-radius: 15px;
+  padding: 15px 30px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 50%;
+}
+.navbar-nav {
+  margin-left: auto;
+}
+.nav-item {
+  margin-left: 10px;
+}
+
+.dropdown-item {
+  border-radius: 10px;
+}
+.nav-item img {
+  vertical-align: middle;
+}
+.footer {
+  padding: 15px 30px;
+  font-size: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+}
+.container{
+
+}

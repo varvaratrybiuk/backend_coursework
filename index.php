@@ -8,7 +8,9 @@ function autoload($class): void
 }
 spl_autoload_register("autoload");
 
-$testRouter = require 'core/routes/TestRoutes.php';
+$homeRouter = require 'core/routes/HomeRoutes.php';
+
 $core = \core\Core::getInstance();
-$core->setRoutes($testRouter);
+$core->setRoutes($homeRouter);
+$core->setRoutes(require 'core/routes/UserRoutes.php');
 $core->run();
