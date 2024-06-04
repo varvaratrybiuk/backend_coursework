@@ -14,7 +14,7 @@ class UserController extends BaseController
     {
         parent::__construct();
         $this->service = new UserService();
-        $this->view->setFilePathToCss("../../public/css/login_reg_style.css");
+        $this->view->setFilePathToCss("../../public/css/form_style.css");
         $this->view->setFilePathToScript("../../public/js/form_fetch.js");
     }
     public function actionShowLogin(): void
@@ -56,7 +56,8 @@ class UserController extends BaseController
             $this->view->renderJson(["error" => $e->getMessage()]);
         }
     }
-    public function actionLogout(){
+    public function actionLogout()
+    {
         Core::getInstance()->getCurrentSession()->unset();
         header("Location: /login");
         exit;
@@ -66,5 +67,8 @@ class UserController extends BaseController
         $this->view->setFilePathToCss("../../public/css/profile.css");
         $this->view->renderTemplate("views/user/usermenu.php", "Профіль",
             $data = ["userMenuContent" => $this->view->getHTML("views/user/user_menu_items/$templateName.php") ]);
+    }
+    public function actionUpdate(){
+
     }
 }

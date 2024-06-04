@@ -1,0 +1,31 @@
+@import "main_page_style";
+@import "form_profile";
+.form-container {
+  border: 2px solid #443d38;
+  padding: 20px;
+  border-radius: 10px;
+  margin: 20px;
+
+  .form-field {
+    > div {
+      margin: 5px;
+
+      > input {
+        @include input-focus($border-color);
+      }
+    }
+
+    button {
+      @include button-style($primary-bg, $secondary-bg, $border-color, $text-color);
+    }
+  }
+
+  .error {
+    color: darkred;
+    border-radius: 2px;
+  }
+}
+
+.content {
+  width: max-content !important;
+}

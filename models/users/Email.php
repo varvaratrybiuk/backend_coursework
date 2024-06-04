@@ -19,11 +19,6 @@ class Email
         return filter_var($email, FILTER_VALIDATE_EMAIL) !== false;
     }
 
-    public function getEmail(): string
-    {
-        return $this->email;
-    }
-
     public function __toString(): string
     {
         return $this->email;

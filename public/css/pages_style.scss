@@ -1,45 +1,61 @@
-@mixin page-styles($backgroundСolor, $items-color, $hover-color, $font, $imgColor) {
+@mixin page-styles($backgroundColor, $itemsColor, $hoverColor, $fontColor, $imgFilter) {
   body {
-    background: $backgroundСolor !important;
-    color: $font !important;
+    background: $backgroundColor !important;
+    color: $fontColor !important;
   }
+
   .navbar {
-    background-color: $items-color;
+    background-color: $itemsColor;
+
+    .container-fluid .navbar-brand {
+      color: $fontColor !important;
+    }
   }
-  .navbar > .container-fluid > .navbar-brand{
-    color: $font !important;
-  }
-  .nav-item:hover {
-    background-color:  fade-out($hover-color, 0.40);
-    border-radius: 7px;
-  }
-  .nav-item > .dropdown-menu {
-    background-color: $hover-color;
-    border:  darken($hover-color, 5%);
+
+  .nav-item {
+    &:hover {
+      background-color: fade-out($hoverColor, 0.40);
+      border-radius: 7px;
+    }
+
+    .dropdown-menu {
+      background-color: $hoverColor;
+      border: darken($hoverColor, 5%);
+
+      .dropdown-item {
+        &:hover,
+        &:focus,
+        &:active {
+          background-color: $itemsColor;
+        }
+      }
+    }
+
+    img {
+      filter: invert($imgFilter);
+    }
   }
 
   .nav-link.active,
   .dropdown-item {
-    color: $font !important;
+    color: $fontColor !important;
   }
-  .nav-item > .dropdown-menu .dropdown-item:hover,
-  .nav-item > .dropdown-menu .dropdown-item:focus,
-  .nav-item > .dropdown-menu .dropdown-item:active {
-    background-color: $items-color;
-  }
-  .nav-item img {
-    filter: invert($imgColor);
-  }
+
   .footer {
-    background-color: fade-out($items-color, 0.20);
+    background-color: fade-out($itemsColor, 0.20);
   }
-  .card > .card-body{
-    background:  $font
-  }
-  .card > .card-body > a {
-    background-color: $items-color;
-  }
-  .card > .carousel > .carousel-inner {
-    border-radius: 5px 5px 0 0;
+
+  .card {
+    .card-body {
+      background: $fontColor;
+
+      a {
+        background-color: $itemsColor;
+      }
+    }
+
+    .carousel .carousel-inner {
+      border-radius: 5px 5px 0 0;
+    }
   }
 }

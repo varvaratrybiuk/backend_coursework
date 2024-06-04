@@ -2,4 +2,6 @@
 $Body: #FEECE2;
 $hover: #D3A69B;
 $items: #E2BFB3;
-@include page-styles($Body, $items, $hover, #000, 0%);
+$font: #000;
+$imgColor: 0%;
+@include page-styles($Body, $items, $hover, $font, $imgColor);

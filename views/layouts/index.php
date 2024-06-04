@@ -56,6 +56,7 @@
         </div>
     </div>
 </nav>
+<div class="page-container container-fluid">
 <div class ="content container-md my-5 mx-auto ">
     <?= $Content?>
 </div>
@@ -75,5 +76,6 @@
         </div>
     </div>
 </footer>
+</div>
 </body>
 </html>

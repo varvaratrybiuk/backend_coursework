@@ -1,0 +1,35 @@
+$primary-bg: #D3A69B;
+$secondary-bg: #E2BFB3;
+$hover-bg: #8a6a61;
+$border-color: rgba(68, 61, 56, 0.65);
+$text-color: #000;
+
+@mixin input-focus($input-border-color) {
+  border: none;
+  border-bottom: 2px solid $input-border-color;
+  border-radius: 2px;
+  background: none;
+  transition: border-color 0.3s;
+
+  &:focus {
+    outline: none;
+    border-bottom-color: darken($input-border-color, 20%);
+  }
+}
+@mixin button-style($primary-bg, $secondary-bg, $input-border-color, $text-color) {
+  border-radius: 3px;
+  background: $primary-bg;
+  border: 1px solid $input-border-color;
+  color: $text-color;
+  cursor: pointer;
+  padding: 10px 20px;
+  transition: background 0.3s, border-color 0.3s;
+
+  &:hover {
+    background: $secondary-bg;
+    border-color: darken($input-border-color, 20%);
+  }
+  &:active {
+    background-color: $secondary-bg;
+  }
+}

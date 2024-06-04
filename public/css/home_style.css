@@ -6,8 +6,7 @@ body {
 .navbar {
   background-color: #E2BFB3;
 }
-
-.navbar > .container-fluid > .navbar-brand {
+.navbar .container-fluid .navbar-brand {
   color: #000 !important;
 }
 
@@ -15,10 +14,15 @@ body {
   background-color: rgba(211, 166, 155, 0.6);
   border-radius: 7px;
 }
-
-.nav-item > .dropdown-menu {
+.nav-item .dropdown-menu {
   background-color: #D3A69B;
   border: #cb9689;
+}
+.nav-item .dropdown-menu .dropdown-item:hover, .nav-item .dropdown-menu .dropdown-item:focus, .nav-item .dropdown-menu .dropdown-item:active {
+  background-color: #E2BFB3;
+}
+.nav-item img {
+  filter: invert(0%);
 }
 
 .nav-link.active,
@@ -26,45 +30,30 @@ body {
   color: #000 !important;
 }
 
-.nav-item > .dropdown-menu .dropdown-item:hover,
-.nav-item > .dropdown-menu .dropdown-item:focus,
-.nav-item > .dropdown-menu .dropdown-item:active {
-  background-color: #E2BFB3;
-}
-
-.nav-item img {
-  filter: invert(0%);
-}
-
 .footer {
   background-color: rgba(226, 191, 179, 0.8);
 }
 
-.card > .card-body {
+.card .card-body {
   background: #000;
 }
-
-.card > .card-body > a {
+.card .card-body a {
   background-color: #E2BFB3;
 }
-
-.card > .carousel > .carousel-inner {
+.card .carousel .carousel-inner {
   border-radius: 5px 5px 0 0;
 }
 
 .album-covers {
   margin: 20px;
 }
-
 .album-covers > div > div > img {
   height: 300px;
 }
-
 .album-covers > div > .col {
   width: 300px;
   padding: 0;
 }
-
 .album-covers > div > .col:hover {
   background-color: rgba(211, 166, 155, 0.44);
   transform: scale(1.1);

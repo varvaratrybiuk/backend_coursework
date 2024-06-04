@@ -19,10 +19,6 @@ class User
         $this->lastname = $lastname;
         $this->birthday = $birthday;
     }
-    public function getId(): int
-    {
-        return $this->id;
-    }
 
     public function getEmail(): Email
     {
@@ -48,33 +44,15 @@ class User
     {
         return $this->birthday;
     }
-    public function setId($id): void
+
+    public function getId(): int
+    {
+        return $this->id;
+    }
+
+    public function setId(int $id): void
     {
         $this->id = $id;
     }
 
-    public function setEmail($email): void
-    {
-        $this->email = $email;
-    }
-
-    public function setPassword($password): void
-    {
-        $this->password = $password;
-    }
-
-    public function setName($name): void
-    {
-        $this->name = $name;
-    }
-
-    public function setLastname($lastname): void
-    {
-        $this->lastname = $lastname;
-    }
-
-    public function setBirthday($birthday): void
-    {
-        $this->birthday = $birthday;
-    }
 }

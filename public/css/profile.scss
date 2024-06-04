@@ -1,12 +1,65 @@
-@import "login_reg_style";
-.menu-container{
+@import "form_style";
+@import "form_profile";
+.menu-container {
   display: flex;
   flex-direction: row;
+
+  .user-menu-items {
+    text-align: center;
+  }
+
+  .user-menu {
+    align-self: center;
+    margin-right: 10px;
+
+    a {
+      background: $primary-bg;
+      border: 1px solid darken($border-color, 20%);
+      color: $text-color;
+      text-decoration: none;
+      padding: 10px;
+      display: block;
+      margin-bottom: 5px;
+      border-radius: 5px;
+      transition: background 0.3s, color 0.3s;
+
+      &:hover {
+        background: $secondary-bg;
+      }
+
+      &.active {
+        background: $hover-bg;
+      }
+    }
+  }
 }
-.user-menu > a{
-  background: #D3A69B;
-  border: 1px solid #8a6a61;
+
+.address-table {
+  border: 2px solid $border-color !important;
+  border-radius: 10px;
+  overflow: hidden;
+
+  thead {
+    --bs-table-bg: #ab8b84 !important;
+    color: $text-color;
+  }
+
+  tbody {
+    tr:nth-child(odd) {
+      --bs-table-bg: rgba(245, 208, 195, 0.62) !important;
+    }
+
+    tr:nth-child(even) {
+      --bs-table-bg: rgba(217, 175, 166, 0.62) !important;
+    }
+  }
 }
-.menu-container > .user-menu{
-  align-self: center;
+.filterDate {
+  display: flex;
+  gap: 10px;
+  .filter-button {
+    @include button-style($primary-bg, $secondary-bg, $border-color, $text-color);
+  }
 }
+
+

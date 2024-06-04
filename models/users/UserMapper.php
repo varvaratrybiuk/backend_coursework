@@ -21,8 +21,22 @@ class UserMapper extends DataMapper
             ]
         )->execute();
     }
-    public function findByEmail(User $user)
+    public function findByEmail(User $user): array
     {
        return $this->db->select("users")->where(["email"=>$user->getEmail()])->execute()->returnAssocArray();
+    }
+    public function findUserById(int $id): array
+    {
+        return $this->db->select("users")->where(["id"=>$id])->execute()->returnAssocArray();
+    }
+    public function updateUser(User $user): void
+    {
+        $this->db->update("users",[   "email"=> (string)$user->getEmail(),
+                "password" => (string)$user->getPassword(),
+                "name" => $user->getName(),
+                "lastname" => $user->getLastname(),
+                "birthday" => $user->getBirthday()
+            ]
+        )->where(["id" => $user->getId()])->execute();
     }
 }

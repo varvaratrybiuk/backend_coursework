@@ -6,8 +6,7 @@ body {
 .navbar {
   background-color: #E2BFB3;
 }
-
-.navbar > .container-fluid > .navbar-brand {
+.navbar .container-fluid .navbar-brand {
   color: #000 !important;
 }
 
@@ -15,10 +14,15 @@ body {
   background-color: rgba(211, 166, 155, 0.6);
   border-radius: 7px;
 }
-
-.nav-item > .dropdown-menu {
+.nav-item .dropdown-menu {
   background-color: #D3A69B;
   border: #cb9689;
+}
+.nav-item .dropdown-menu .dropdown-item:hover, .nav-item .dropdown-menu .dropdown-item:focus, .nav-item .dropdown-menu .dropdown-item:active {
+  background-color: #E2BFB3;
+}
+.nav-item img {
+  filter: invert(0%);
 }
 
 .nav-link.active,
@@ -26,51 +30,18 @@ body {
   color: #000 !important;
 }
 
-.nav-item > .dropdown-menu .dropdown-item:hover,
-.nav-item > .dropdown-menu .dropdown-item:focus,
-.nav-item > .dropdown-menu .dropdown-item:active {
-  background-color: #E2BFB3;
-}
-
-.nav-item img {
-  filter: invert(0%);
-}
-
 .footer {
   background-color: rgba(226, 191, 179, 0.8);
 }
 
-.card > .card-body {
+.card .card-body {
   background: #000;
 }
-
-.card > .card-body > a {
+.card .card-body a {
   background-color: #E2BFB3;
 }
-
-.card > .carousel > .carousel-inner {
+.card .carousel .carousel-inner {
   border-radius: 5px 5px 0 0;
-}
-
-.form-container .form-field > div > input {
-  border: none;
-  border-bottom: 2px solid rgba(129, 97, 90, 0.44);
-  border-radius: 2px;
-  background: none;
-}
-
-.form-container .form-field > div > input:focus {
-  outline: none;
-}
-
-.form-container .form-field > div {
-  margin: 5px;
-}
-
-.form-container .form-field button {
-  border-radius: 3px;
-  background: #D3A69B;
-  border: 1px solid rgba(129, 97, 90, 0.44);
 }
 
 .form-container {
@@ -79,7 +50,36 @@ body {
   border-radius: 10px;
   margin: 20px;
 }
-
+.form-container .form-field > div {
+  margin: 5px;
+}
+.form-container .form-field > div > input {
+  border: none;
+  border-bottom: 2px solid rgba(68, 61, 56, 0.65);
+  border-radius: 2px;
+  background: none;
+  transition: border-color 0.3s;
+}
+.form-container .form-field > div > input:focus {
+  outline: none;
+  border-bottom-color: rgba(12, 11, 10, 0.65);
+}
+.form-container .form-field button {
+  border-radius: 3px;
+  background: #D3A69B;
+  border: 1px solid rgba(68, 61, 56, 0.65);
+  color: #000;
+  cursor: pointer;
+  padding: 10px 20px;
+  transition: background 0.3s, border-color 0.3s;
+}
+.form-container .form-field button:hover {
+  background: #E2BFB3;
+  border-color: rgba(12, 11, 10, 0.65);
+}
+.form-container .form-field button:active {
+  background-color: #E2BFB3;
+}
 .form-container .error {
   color: darkred;
   border-radius: 2px;
@@ -93,14 +93,66 @@ body {
   display: flex;
   flex-direction: row;
 }
-
-.user-menu > a {
+.menu-container .user-menu-items {
+  text-align: center;
+}
+.menu-container .user-menu {
+  align-self: center;
+  margin-right: 10px;
+}
+.menu-container .user-menu a {
   background: #D3A69B;
-  border: 1px solid #8a6a61;
+  border: 1px solid rgba(12, 11, 10, 0.65);
+  color: #000;
+  text-decoration: none;
+  padding: 10px;
+  display: block;
+  margin-bottom: 5px;
+  border-radius: 5px;
+  transition: background 0.3s, color 0.3s;
+}
+.menu-container .user-menu a:hover {
+  background: #E2BFB3;
+}
+.menu-container .user-menu a.active {
+  background: #8a6a61;
 }
 
-.menu-container > .user-menu {
-  align-self: center;
+.address-table {
+  border: 2px solid rgba(68, 61, 56, 0.65) !important;
+  border-radius: 10px;
+  overflow: hidden;
+}
+.address-table thead {
+  --bs-table-bg: #ab8b84 !important;
+  color: #000;
+}
+.address-table tbody tr:nth-child(odd) {
+  --bs-table-bg: rgba(245, 208, 195, 0.62) !important;
+}
+.address-table tbody tr:nth-child(even) {
+  --bs-table-bg: rgba(217, 175, 166, 0.62) !important;
+}
+
+.filterDate {
+  display: flex;
+  gap: 10px;
+}
+.filterDate .filter-button {
+  border-radius: 3px;
+  background: #D3A69B;
+  border: 1px solid rgba(68, 61, 56, 0.65);
+  color: #000;
+  cursor: pointer;
+  padding: 10px 20px;
+  transition: background 0.3s, border-color 0.3s;
+}
+.filterDate .filter-button:hover {
+  background: #E2BFB3;
+  border-color: rgba(12, 11, 10, 0.65);
+}
+.filterDate .filter-button:active {
+  background-color: #E2BFB3;
 }
 
 /*# sourceMappingURL=profile.css.map */

@@ -1,18 +1,23 @@
 @import "main_page_style";
-.album-covers{
+.album-covers {
   margin: 20px;
-}
-.album-covers > div > div > img {
-  height: 300px;
-}
-.album-covers > div > .col{
-  width: 300px;
-  padding: 0;
-}
-.album-covers > div > .col:hover{
-  background-color: rgba(211, 166, 155, 0.44);
-  transform: scale(1.1);
-  transition: transform 0.3s ease;
-  padding: 10px;
-  border-radius: 10px;
+
+  > div {
+    > div > img {
+      height: 300px;
+    }
+
+    > .col {
+      width: 300px;
+      padding: 0;
+
+      &:hover {
+        background-color: rgba(211, 166, 155, 0.44);
+        transform: scale(1.1);
+        transition: transform 0.3s ease;
+        padding: 10px;
+        border-radius: 10px;
+      }
+    }
+  }
 }

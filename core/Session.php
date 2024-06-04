@@ -19,7 +19,7 @@ class Session
         if (array_key_exists($key, $_SESSION))
             return $_SESSION[$key];
     }
-    public function unset()
+    public function unset(): void
     {
         unset($_SESSION['id']);
     }

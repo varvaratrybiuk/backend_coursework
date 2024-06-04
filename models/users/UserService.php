@@ -4,7 +4,7 @@ namespace models\users;
 
 class UserService
 {
-    public UserMapper $mapper;
+    private UserMapper $mapper;
 
     public function __construct()
     {
@@ -30,5 +30,19 @@ class UserService
         if($this->mapper->findByEmail($user) != [])
             throw new \Exception("Користувач існує");
         $this->mapper->save($user);
+    }
+    public function findById(int $id): array
+    {
+        $userData = $this->db->select("users")->where(["id" => $id])->execute()->returnAssocArray();
+        unset($userData['id']);
+        return $userData;
+    }
+    public function updateUser(int $id, $email, $password, $name, $lastname, $birthday = null): void
+    {
+        $validEmail = new Email($email);
+        $validPassword = new Password($password);
+        $user = new User($validEmail, $validPassword, $name, $lastname, $birthday);
+        $user->setId($id);
+        $this->updateExistingUser($user);
     }
 }
