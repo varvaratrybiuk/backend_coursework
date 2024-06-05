@@ -35,13 +35,37 @@ body {
 }
 
 .card .card-body {
-  background: #000;
+  background: mintcream;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 .card .card-body a {
-  background-color: #E2BFB3;
+  background-color: #D3A69B;
 }
 .card .carousel .carousel-inner {
   border-radius: 5px 5px 0 0;
+}
+.card .card-text {
+  font-size: 1rem;
+  max-height: 10rem;
+  overflow-y: auto;
+  text-align: center;
+  padding: 0.5rem;
+}
+.card .card-text::-webkit-scrollbar {
+  width: 8px;
+}
+.card .card-text::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+.card .card-text::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 10px;
+}
+.card .card-text::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }
 
 .form-container {

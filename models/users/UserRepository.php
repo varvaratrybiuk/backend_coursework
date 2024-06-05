@@ -2,9 +2,9 @@
 
 namespace models\users;
 
-use core\DataMapper;
+use core\Repository;
 
-class UserMapper extends DataMapper
+class UserRepository extends Repository
 {
     public function __construct()
     {

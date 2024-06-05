@@ -4,19 +4,19 @@ namespace models\address;
 
 class AddressService
 {
-    private AddressMapper $addressMapper;
+    private AddressRepository $repository;
     public function __construct()
     {
-        $this->addressMapper = new AddressMapper();
+        $this->repository = new AddressRepository();
     }
     public function addAddress(AddressDTO $dto, int $userId): void
     {
         $address = new Address($dto->country,$dto->city,$dto->street, $dto->zipCode);
-        $this->addressMapper->save(new AddressInformation($address, $userId));
+        $this->repository->save(new AddressInformation($address, $userId));
     }
     public function findByUserId(int $userId): array
     {
-        $addressArray = $this->addressMapper->findByUserId($userId);
+        $addressArray = $this->repository->findByUserId($userId);
         $addressString = [];
         foreach ($addressArray as $address){
             $addressString["addresses"][] = (string)$address->getAddress();

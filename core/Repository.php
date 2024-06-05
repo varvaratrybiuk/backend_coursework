@@ -2,7 +2,7 @@
 
 namespace core;
 
-class DataMapper
+class Repository
 {
     protected DataBase $db;
 

@@ -13,4 +13,5 @@ $homeRouter = require 'core/routes/HomeRoutes.php';
 $core = \core\Core::getInstance();
 $core->setRoutes($homeRouter);
 $core->setRoutes(require 'core/routes/UserRoutes.php');
+$core->setRoutes(require 'core/routes/CatalogRoutes.php');
 $core->run();

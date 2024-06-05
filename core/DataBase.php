@@ -12,6 +12,7 @@ class DataBase
     private PDO $pdo;
     private array $result = [];
     private string $sql = "";
+    private string $where = "";
     private array $queryParts = [
         'parameters' => [],
         'sqlQuery' => ""
@@ -34,7 +35,7 @@ class DataBase
 
     private function prepareQuery(array $data): PDOStatement|false
     {
-        $this->sql .= $this->queryParts['sqlQuery'] . $this->join . $this->orderBy . $this->groupBy;
+        $this->sql .= $this->queryParts['sqlQuery'] . $this->join . $this->where . $this->orderBy . $this->groupBy;
         $preparedQuery = $this->pdo->prepare($this->sql);
         foreach ($data as $key => $value) {
             $preparedQuery->bindValue("$key", $value);
@@ -44,7 +45,7 @@ class DataBase
 
     public function select(string $table, string $fields = "*"): self
     {
-        $this->sql .= "SELECT $table.$fields FROM $table";
+        $this->sql .= "SELECT $fields FROM $table";
         return $this;
     }
     public function insert(string $tableName, array $columnsAndValues):self
@@ -79,13 +80,15 @@ class DataBase
         $markIndex = 0;
         foreach ($fieldsWithValues as $fieldName => $fieldValue) {
             $mark = $marks[$markIndex] ?? '=';
-            if($fieldValue == null)
+            if ($fieldValue == null) {
                 break;
-            $this->queryParts['parameters'][":$fieldName"] = $fieldValue;
-            $conditions[] = "$fieldName $mark :$fieldName";
+            }
+            $value = str_replace('.', '', $fieldName);
+            $this->queryParts['parameters'][":$value"] = $fieldValue;
+            $conditions[] = "$fieldName $mark :$value";
             $markIndex++;
         }
-        $this->queryParts['sqlQuery'] .= ' WHERE ' . implode(" $operator ", $conditions);
+        $this->where .= ' WHERE ' . implode(" $operator ", $conditions);
         return $this;
     }
 
@@ -129,6 +132,7 @@ class DataBase
             'sqlQuery' => ""
         ];
         $this->join = "";
+        $this->where = "";
         $this->orderBy = "";
         $this->groupBy = "";
     }

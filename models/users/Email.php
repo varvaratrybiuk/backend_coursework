@@ -2,10 +2,14 @@
 
 namespace models\users;
 
+use Exception;
+
 class Email
 {
     private string $email;
-
+    /**
+     * @throws Exception
+     */
     public function __construct(string $email)
     {
         if (!$this->isValidEmail($email)) {

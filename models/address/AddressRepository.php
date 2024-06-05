@@ -2,9 +2,9 @@
 
 namespace models\address;
 
-use core\DataMapper;
+use core\Repository;
 
-class AddressMapper extends DataMapper
+class AddressRepository extends Repository
 {
     public function __construct()
     {
