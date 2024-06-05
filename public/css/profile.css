@@ -64,6 +64,9 @@ body {
   outline: none;
   border-bottom-color: rgba(12, 11, 10, 0.65);
 }
+.form-container .form-field > div > input:focus {
+  background: none;
+}
 .form-container .form-field button {
   border-radius: 3px;
   background: #D3A69B;

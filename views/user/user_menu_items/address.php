@@ -1,4 +1,5 @@
 <?php
+/** @var array $addresses */
 ?>
 <div class="container-md">
     <h3>Доступні адреси</h3>
@@ -6,33 +7,25 @@
         <thead>
         <tr>
             <th scope="col">№</th>
-            <th scope="col">Країна</th>
-            <th scope="col">Місто</th>
-            <th scope="col">Вулиця</th>
-            <th scope="col">ZIP код</th>
+            <th scope="col">Адреса</th>
         </tr>
         </thead>
         <tbody>
-        <tr>
-            <th scope="row">1</th>
-            <td>Україна</td>
-            <td>Житомир</td>
-            <td>Пр. Миру, 3</td>
-            <td>10001</td>
-        </tr>
-        <tr>
-            <th scope="row">1</th>
-            <td>Україна</td>
-            <td>Житомир</td>
-            <td>Пр. Миру, 3</td>
-            <td>10001</td>
-        </tr>
+        <?php $count = 1; ?>
+        <?php foreach($addresses as $address): ?>
+            <tr>
+                <th scope="row"><?= $count ?></th>
+                <td><?= $address ?></td>
+            </tr>
+            <?php $count++; ?>
+        <?php endforeach; ?>
         </tbody>
     </table>
 </div>
 <div class="form-container">
     <h3>Додати адресу</h3>
-    <form id="addressForm" class="AddressForm" method="POST">
+    <div id="error" class="error"></div>
+    <form id="form" class="AddressForm" method="POST">
         <div class="row g-1 form-field countryField">
             <div class="col-auto">
                 <label for="country">Країна:</label>

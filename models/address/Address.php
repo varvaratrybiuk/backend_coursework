@@ -37,9 +37,9 @@ class Address
     {
         return $this->zipCode;
     }
-    public function formatAddress(): string
+    public function __ToString(): string
     {
-        return "{$this->street}, {$this->city}, {$this->zipCode}, {$this->country}";
+        return "{$this->country}  {$this->city}, {$this->street}: {$this->zipCode} ";
     }
     private function ensureIsValidCountry(string $country): void
     {

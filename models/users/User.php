@@ -6,20 +6,25 @@ namespace models\users;
 class User
 {
     private int $id;
+    private ?int $role_id;
     private ?Email $email ;
     private ?Password $password;
     private ?string $name;
     private ?string $lastname;
     private ?string $birthday;
-    public function __construct($email = null, $password = null, $name = null, $lastname = null, $birthday = null)
+    public function __construct(?Email $email = null, ?Password $password = null, ?string $name = null, ?string $lastname = null, ?string $birthday = null, ?int $role_id = null)
     {
         $this->email = $email;
         $this->password = $password;
         $this->name = $name;
         $this->lastname = $lastname;
         $this->birthday = $birthday;
+        $this->role_id = $role_id;
     }
-
+    public function getRoleId()
+    {
+        return $this->role_id;
+    }
     public function getEmail(): Email
     {
         return $this->email;

@@ -32,7 +32,6 @@ class UserMapper extends DataMapper
     public function updateUser(User $user): void
     {
         $this->db->update("users",[   "email"=> (string)$user->getEmail(),
-                "password" => (string)$user->getPassword(),
                 "name" => $user->getName(),
                 "lastname" => $user->getLastname(),
                 "birthday" => $user->getBirthday()

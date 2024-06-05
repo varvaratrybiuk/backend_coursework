@@ -12,7 +12,12 @@
 
       > input {
         @include input-focus($border-color);
+
+        &:focus{
+          background: none;
+        }
       }
+
     }
 
     button {

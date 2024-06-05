@@ -36,9 +36,17 @@ class AddressMapper extends DataMapper
             $address
         );
     }
-    public function findByUserId(int $userId): AddressInformation
+    private function convertToAddressInformationArray(array $data): array
     {
-        return $this->convertToAddressInformation($this->db->select("address_information")
+        $addressInformationArray = [];
+        foreach ($data as $addressData) {
+            $addressInformationArray[] = $this->convertToAddressInformation($addressData);
+        }
+        return $addressInformationArray;
+    }
+    public function findByUserId(int $userId): array
+    {
+        return $this->convertToAddressInformationArray($this->db->select("address_information")
             ->where(["user_id"=> $userId])->execute()->returnAssocArray());
     }
 }

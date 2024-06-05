@@ -9,14 +9,18 @@ class AddressService
     {
         $this->addressMapper = new AddressMapper();
     }
-    public function addAddress(string $country, string $city, string $street, string $zipCode, int $userId): void
+    public function addAddress(AddressDTO $dto, int $userId): void
     {
-        $address = new Address($country, $city, $street, $zipCode);
+        $address = new Address($dto->country,$dto->city,$dto->street, $dto->zipCode);
         $this->addressMapper->save(new AddressInformation($address, $userId));
     }
-    public function findByUserId(int $userId): string
+    public function findByUserId(int $userId): array
     {
-        $address = $this->addressMapper->findByUserId($userId)->getAddress();
-        return (string)$address;
+        $addressArray = $this->addressMapper->findByUserId($userId);
+        $addressString = [];
+        foreach ($addressArray as $address){
+            $addressString["addresses"][] = (string)$address->getAddress();
+        }
+        return  $addressString;
     }
 }

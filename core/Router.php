@@ -8,9 +8,6 @@ class Router
     private array $routes = [
         "GET" => [],
         "POST" => [],
-        "DELETE" => [],
-        "PUT" => [],
-        "PATCH" => []
     ];
     public function get(string $uri, string $action): void
     {
@@ -20,19 +17,7 @@ class Router
     {
         $this->register($uri, $action, "POST");
     }
-    public function delete(string $uri, string $action): void
-    {
-        $this->register($uri, $action, "DELETE");
-    }
-    public function put(string $uri, string $action): void
-    {
-        $this->register($uri, $action, "PUT");
-    }
 
-    public function patch(string $uri, string $action): void
-    {
-        $this->register($uri, $action, "PATCH");
-    }
     public function register(string $uri, string $action, string $method): void
     {
         [$controller, $function] = explode("_", $action);

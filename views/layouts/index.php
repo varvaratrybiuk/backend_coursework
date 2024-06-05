@@ -40,7 +40,7 @@
                     </a>
                     <ul class="dropdown-menu">
                         <?php if(\core\Core::getInstance()->getCurrentSession()->userIsLoggedIn()):?>
-                            <li><a class="dropdown-item" href="http://merchua/profile/">Профіль</a></li>
+                            <li><a class="dropdown-item" href="http://merchua/profile/contact">Профіль</a></li>
                             <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item" href="http://merchua/logout">Вихід</a></li>
                         <?php else: ?>
