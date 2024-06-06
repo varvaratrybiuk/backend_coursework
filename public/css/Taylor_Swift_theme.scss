@@ -1,0 +1,7 @@
+@import "pages_style";
+$TayBodyBackground: #e5d3c6;
+$TayItems: #747264;
+$TayHover: #3C3633;
+$TayFontColor: #EEEDEB;
+@include page-styles($TayBodyBackground, $TayItems, $TayHover, $TayFontColor, 100%);
+@include catalog-theme($TayItems, $TayHover, $TayFontColor)

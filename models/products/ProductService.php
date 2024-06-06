@@ -15,7 +15,10 @@ class ProductService
     {
         return $this->productRepository->findAllProducts($artistName);
     }
-
+    public function sortProducts($sortByPrice, $sortByRating, ?string $artistName = null): array
+    {
+        return $this->productRepository->sortByDefinition($artistName, $sortByPrice, $sortByRating);
+    }
     public function getProductById(int $id): ProductDTO
     {
         return $this->productRepository->findProductById($id);

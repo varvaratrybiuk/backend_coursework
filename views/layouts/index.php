@@ -34,6 +34,10 @@
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="http://merchua/">Головна</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="http://merchua/catalog/">Каталог</a>
+                </li>
+
                 <li class="nav-item dropdown">
                     <a class="nav-link" href="" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         <img alt="profile" src="../../public/images/profile.svg" height="20"/>
@@ -57,7 +61,7 @@
     </div>
 </nav>
 <div class="page-container container-fluid">
-<div class ="content container-md my-5 mx-auto ">
+<div class ="content container-md my-5 mx-auto " id="content">
     <?= $Content?>
 </div>
 <footer class="footer mt-auto py-2 ">

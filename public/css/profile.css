@@ -34,40 +34,6 @@ body {
   background-color: rgba(226, 191, 179, 0.8);
 }
 
-.card .card-body {
-  background: mintcream;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-.card .card-body a {
-  background-color: #D3A69B;
-}
-.card .carousel .carousel-inner {
-  border-radius: 5px 5px 0 0;
-}
-.card .card-text {
-  font-size: 1rem;
-  max-height: 10rem;
-  overflow-y: auto;
-  text-align: center;
-  padding: 0.5rem;
-}
-.card .card-text::-webkit-scrollbar {
-  width: 8px;
-}
-.card .card-text::-webkit-scrollbar-track {
-  background: #f1f1f1;
-  border-radius: 10px;
-}
-.card .card-text::-webkit-scrollbar-thumb {
-  background: #888;
-  border-radius: 10px;
-}
-.card .card-text::-webkit-scrollbar-thumb:hover {
-  background: #555;
-}
-
 .form-container {
   border: 2px solid #443d38;
   padding: 20px;
@@ -89,10 +55,10 @@ body {
   border-bottom-color: rgba(12, 11, 10, 0.65);
 }
 .form-container .form-field > div > input:focus {
-  background: none;
+  background: none !important;
 }
 .form-container .form-field button {
-  border-radius: 3px;
+  border-radius: 8px;
   background: #D3A69B;
   border: 1px solid rgba(68, 61, 56, 0.65);
   color: #000;
@@ -102,7 +68,7 @@ body {
 }
 .form-container .form-field button:hover {
   background: #E2BFB3;
-  border-color: rgba(12, 11, 10, 0.65);
+  border-color: rgba(96, 86, 79, 0.65);
 }
 .form-container .form-field button:active {
   background-color: #E2BFB3;
@@ -166,7 +132,7 @@ body {
   gap: 10px;
 }
 .filterDate .filter-button {
-  border-radius: 3px;
+  border-radius: 8px;
   background: #D3A69B;
   border: 1px solid rgba(68, 61, 56, 0.65);
   color: #000;
@@ -176,7 +142,7 @@ body {
 }
 .filterDate .filter-button:hover {
   background: #E2BFB3;
-  border-color: rgba(12, 11, 10, 0.65);
+  border-color: rgba(96, 86, 79, 0.65);
 }
 .filterDate .filter-button:active {
   background-color: #E2BFB3;

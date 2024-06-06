@@ -1,0 +1,7 @@
+@import "pages_style";
+$AriBodyBackground: #42240C;
+$AriItems: #C81912;
+$AriHover: #F64B3C;
+$AriFontColor: #FDBA9A;
+@include page-styles($AriBodyBackground, $AriItems, $AriHover, #fff, 100%);
+@include catalog-theme($AriItems, $AriBodyBackground, #fff)

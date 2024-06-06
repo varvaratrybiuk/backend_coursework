@@ -1,0 +1,187 @@
+body {
+  background: #FEECE2 !important;
+  color: #000 !important;
+}
+
+.navbar {
+  background-color: #E2BFB3;
+}
+.navbar .container-fluid .navbar-brand {
+  color: #000 !important;
+}
+
+.nav-item:hover {
+  background-color: rgba(211, 166, 155, 0.6);
+  border-radius: 7px;
+}
+.nav-item .dropdown-menu {
+  background-color: #D3A69B;
+  border: #cb9689;
+}
+.nav-item .dropdown-menu .dropdown-item:hover, .nav-item .dropdown-menu .dropdown-item:focus, .nav-item .dropdown-menu .dropdown-item:active {
+  background-color: #E2BFB3;
+}
+.nav-item img {
+  filter: invert(0%);
+}
+
+.nav-link.active,
+.dropdown-item {
+  color: #000 !important;
+}
+
+.footer {
+  background-color: rgba(226, 191, 179, 0.8);
+}
+
+.card-header {
+  background-color: #866860;
+  color: #000;
+}
+
+.card {
+  background-color: transparent !important;
+}
+
+.card-body {
+  color: #000;
+}
+
+.comments .card-body {
+  overflow-y: scroll;
+}
+.comments .card-body::-webkit-scrollbar {
+  width: 8px;
+}
+.comments .card-body::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+.comments .card-body::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 10px;
+}
+.comments .card-body::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+.comments .card-body h5,
+.comments .card-body p {
+  text-align: start;
+}
+
+.product-container {
+  border: 3px solid rgba(68, 61, 56, 0.65) !important;
+  border-radius: 10px;
+  display: flex;
+}
+.product-container .description-container {
+  flex: 1;
+  margin: auto;
+  display: flex;
+  align-content: center;
+  height: 100%;
+}
+.product-container .description-container .description table {
+  --bs-table-bg: none !important;
+}
+.product-container .description-container .description table tbody, .product-container .description-container .description table td, .product-container .description-container .description table tr {
+  border: none !important;
+}
+.product-container .description-container .description table tbody button, .product-container .description-container .description table td button, .product-container .description-container .description table tr button {
+  border-radius: 8px;
+  background: #D3A69B;
+  border: 1px solid rgba(68, 61, 56, 0.65);
+  color: #000;
+  cursor: pointer;
+  padding: 10px 20px;
+  transition: background 0.3s, border-color 0.3s;
+}
+.product-container .description-container .description table tbody button:hover, .product-container .description-container .description table td button:hover, .product-container .description-container .description table tr button:hover {
+  background: #E2BFB3;
+  border-color: rgba(96, 86, 79, 0.65);
+}
+.product-container .description-container .description table tbody button:active, .product-container .description-container .description table td button:active, .product-container .description-container .description table tr button:active {
+  background-color: #E2BFB3;
+}
+.product-container .description-container .description table tbody > tr > td:nth-child(odd) {
+  font-weight: bold;
+}
+.product-container .description-container .description table .sizes > ul {
+  padding: 0;
+  list-style: none;
+  display: flex;
+}
+.product-container .description-container .description table .sizes > ul li {
+  flex-direction: column;
+  margin-left: 20px;
+}
+.product-container .description-container .description table .sizes > ul li:hover {
+  background: #D3A69B;
+  padding: 10px;
+  border-radius: 3px;
+}
+
+.add-comment .card-body .form .row {
+  margin-bottom: 16px;
+  display: flex;
+  padding: 20px;
+}
+.add-comment .card-body .form label {
+  font-weight: bold;
+}
+.add-comment .card-body .form textarea {
+  padding: 8px;
+  border: none;
+  border-bottom: 2px solid #443d38;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  background: none;
+  resize: none;
+}
+.add-comment .card-body .form textarea:focus {
+  border: none;
+  border-bottom: 2px solid #443d38;
+  outline: none;
+}
+.add-comment .card-body .form input[type=range] {
+  width: min-content;
+  cursor: pointer;
+  appearance: none;
+  height: 8px;
+  border-radius: 4px;
+  background: #f6f5f2;
+  outline: none;
+  transition: background 0.2s;
+}
+.add-comment .card-body .form input[type=range]::-webkit-slider-thumb {
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #443d38;
+  cursor: pointer;
+}
+.add-comment .card-body .form output {
+  display: block;
+  margin-top: 8px;
+  font-weight: bold;
+}
+.add-comment .card-body .form button {
+  border-radius: 8px;
+  background: #D3A69B;
+  border: 1px solid rgba(68, 61, 56, 0.65);
+  color: #000;
+  cursor: pointer;
+  padding: 10px 20px;
+  transition: background 0.3s, border-color 0.3s;
+  width: 145px;
+  height: max-content;
+}
+.add-comment .card-body .form button:hover {
+  background: #E2BFB3;
+  border-color: rgba(96, 86, 79, 0.65);
+}
+.add-comment .card-body .form button:active {
+  background-color: #E2BFB3;
+}
+
+/*# sourceMappingURL=product_page.css.map */

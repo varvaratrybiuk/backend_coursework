@@ -1,5 +1,5 @@
 @import "main_page_style";
-@import "form_profile";
+@import "input_button_style";
 .form-container {
   border: 2px solid #443d38;
   padding: 20px;
@@ -14,7 +14,7 @@
         @include input-focus($border-color);
 
         &:focus{
-          background: none;
+          background: none !important;
         }
       }
 

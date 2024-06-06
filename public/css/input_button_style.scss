@@ -17,7 +17,7 @@ $text-color: #000;
   }
 }
 @mixin button-style($primary-bg, $secondary-bg, $input-border-color, $text-color) {
-  border-radius: 3px;
+  border-radius: 8px;
   background: $primary-bg;
   border: 1px solid $input-border-color;
   color: $text-color;
@@ -27,7 +27,7 @@ $text-color: #000;
 
   &:hover {
     background: $secondary-bg;
-    border-color: darken($input-border-color, 20%);
+    border-color: lighten($input-border-color, 10%);
   }
   &:active {
     background-color: $secondary-bg;

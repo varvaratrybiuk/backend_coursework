@@ -27,7 +27,7 @@ class UserService
     {
         $email = new Email($email);
         $user = $this->repository->findByEmail(new User($email));
-        if(!password_verify($password, $user[0]["password"]))
+        if(empty($user) || !password_verify($password, $user[0]["password"]))
             throw new \Exception("Неправильний пароль або емейл не існує");
         return $user[0]["id"];
     }

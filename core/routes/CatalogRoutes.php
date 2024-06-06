@@ -4,7 +4,10 @@ use core\Router;
 
 $catalogRouter = new Router();
 
-$catalogRouter->get("/catalog/{sort_type}?", "CatalogController_showCatalogPage");
-$catalogRouter->get("/catalog/{artist_name}/{sort_type}?", "CatalogController_showArtistCatalogPage");
+$catalogRouter->get("/catalog/", "CatalogController_showCatalogPage");
+$catalogRouter->get("/catalog/{artist_name}/", "CatalogController_showArtistCatalogPage");
+$catalogRouter->get("/catalog/product/{product_id}", "CatalogController_showProductPage");
 
+$catalogRouter->post("/catalog/", "CatalogController_showSortedProducts");
+$catalogRouter->post("/catalog/{artist_name}?/", "CatalogController_showSortedProducts");
 return $catalogRouter;

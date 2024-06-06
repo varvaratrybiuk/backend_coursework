@@ -72,8 +72,7 @@ class Router
             }
         }
         catch (\Throwable $e) {
-            echo $e->getMessage();
-            die();
+
             $error = new ErrorController();
             $error->errorPage(500);
         }

@@ -3,7 +3,7 @@
   margin: 20px;
 
   > div {
-    > div > img {
+    > div > a >img {
       height: 300px;
     }
 
@@ -20,9 +20,4 @@
       }
     }
   }
-}
-.product-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr));
-  grid-gap: 1rem;
 }

@@ -41,4 +41,13 @@ class View
     {
         echo json_encode($data, JSON_UNESCAPED_UNICODE);
     }
+    public function renderTemplateWithout(string $path, string $title, array $data=[]): void
+    {
+        $content = $this->getHTML($path, $data);
+        if ($content === false) {
+            echo "Template not found: $path";
+            return;
+        }
+        echo $content;
+    }
 }

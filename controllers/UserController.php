@@ -27,14 +27,26 @@ class UserController extends BaseController
         if(!Core::getInstance()->getCurrentSession()->userIsLoggedIn())
             header("Location: /login");
     }
+    private function redirectIfLoggedIn(): void
+    {
+        if (Core::getInstance()->getCurrentSession()->userIsLoggedIn()) {
+            header("Location: /");
+            exit();
+        }
+    }
+
     public function actionShowLogin(): void
     {
+        $this->redirectIfLoggedIn();
         $this->view->renderTemplate("views/user/login.php", "Вхід");
     }
+
     public function actionShowRegister(): void
     {
+        $this->redirectIfLoggedIn();
         $this->view->renderTemplate("views/user/registration.php", "Реєстрація");
     }
+
     private function tryCatchWrapper(callable $action): void
     {
         try {
@@ -43,16 +55,18 @@ class UserController extends BaseController
             $this->view->renderJson(["error" => $e->getMessage()]);
         }
     }
+
     public function actionLogin(): void
     {
         $this->tryCatchWrapper(function () {
             $email = Request::getPost('logemail');
             $password = Request::getPost('logpassword');
-            $user_id = $this->service->login($email , $password);
+            $user_id = $this->service->login($email, $password);
             Core::getInstance()->getCurrentSession()->add("id", $user_id);
             $this->view->renderJson(["redirect" => "/"]);
         });
     }
+
     public function actionRegister(): void
     {
         $this->tryCatchWrapper(function () {

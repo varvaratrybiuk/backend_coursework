@@ -1,3 +1,4 @@
+@import "input_button_style";
 @mixin page-styles($backgroundColor, $itemsColor, $hoverColor, $fontColor, $imgFilter) {
   body {
     background: $backgroundColor !important;
@@ -17,11 +18,9 @@
       background-color: fade-out($hoverColor, 0.40);
       border-radius: 7px;
     }
-
     .dropdown-menu {
       background-color: $hoverColor;
       border: darken($hoverColor, 5%);
-
       .dropdown-item {
         &:hover,
         &:focus,
@@ -44,43 +43,105 @@
   .footer {
     background-color: fade-out($itemsColor, 0.20);
   }
-
+}
+@mixin catalog-theme($cardBackground, $buttonColor, $fontColor) {
   .card {
+    border: none !important;
     .card-body {
-      background: mintcream ;
+      background: $cardBackground;
       display: flex;
+      border-radius: 0 0 7px 7px !important;
       flex-direction: column;
       align-items: center;
-
+      color: $fontColor;
       a {
-        background-color: $hoverColor;
+        @include button-style($buttonColor, lighten($buttonColor, 5%), $buttonColor, $fontColor);
+        margin-top: 10px;
       }
     }
 
     .carousel .carousel-inner {
       border-radius: 5px 5px 0 0;
     }
-    .card-text{
-      font-size: 1rem;
-      max-height: 10rem;
+
+    .card-text {
+      font-size: 16px;
+      max-height: 160px;
       overflow-y: auto;
       text-align: center;
-      padding: 0.5rem;
-    }
-    .card-text::-webkit-scrollbar {
-      width: 8px;
-    }
-    .card-text::-webkit-scrollbar-track {
-      background: #f1f1f1;
-      border-radius: 10px;
-    }
-    .card-text::-webkit-scrollbar-thumb {
-      background: #888;
-      border-radius: 10px;
-    }
+      padding: 8px;
 
-    .card-text::-webkit-scrollbar-thumb:hover {
-      background: #555;
+      &::-webkit-scrollbar {
+        width: 8px;
+      }
+
+      &::-webkit-scrollbar-track {
+        background: #f1f1f1;
+        border-radius: 10px;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background: #888;
+        border-radius: 10px;
+      }
+
+      &::-webkit-scrollbar-thumb:hover {
+        background: #555;
+      }
     }
+  }
+
+  .sorting-and-products {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .sorting-container {
+    flex: 0 0 auto;
+    background: $cardBackground;
+    border-radius: 7px;
+    padding: 10px;
+    height: 300px;
+    margin-right: 16px;
+
+    .form {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+
+      .sort-group {
+        margin-bottom: 1rem;
+
+        .header {
+          label {
+            font-weight: bold;
+          }
+        }
+
+        label {
+          display: flex;
+          align-items: center;
+          margin-bottom: 8px;
+          color: $fontColor;
+
+          input[type="radio"] {
+            margin-right: 8px;
+          }
+        }
+      }
+
+      button {
+        @include button-style($buttonColor, lighten($buttonColor, 5%), $buttonColor, $fontColor);
+        align-self: center;
+      }
+    }
+  }
+
+  .product-grid {
+    flex: 1;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(288px, 1fr));
+    grid-gap: 1rem;
   }
 }
