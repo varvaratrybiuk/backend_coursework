@@ -37,7 +37,6 @@
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="http://merchua/catalog/">Каталог</a>
                 </li>
-
                 <li class="nav-item dropdown">
                     <a class="nav-link" href="" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         <img alt="profile" src="../../public/images/profile.svg" height="20"/>
@@ -54,7 +53,7 @@
                     </ul>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href=""><img alt="cart" src="../../public/images/cart.svg" height="20"/></a>
+                    <a class="nav-link" href="http://merchua/cart"><img alt="cart" src="../../public/images/cart.svg" height="20"/></a>
                 </li>
             </ul>
         </div>

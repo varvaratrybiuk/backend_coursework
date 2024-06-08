@@ -34,6 +34,12 @@ body {
   background-color: rgba(226, 191, 179, 0.8);
 }
 
+.active-li {
+  background: rgba(211, 166, 155, 0.7);
+  padding: 10px;
+  border-radius: 3px;
+}
+
 .card-header {
   background-color: #866860;
   color: #000;
@@ -47,23 +53,6 @@ body {
   color: #000;
 }
 
-.comments .card-body {
-  overflow-y: scroll;
-}
-.comments .card-body::-webkit-scrollbar {
-  width: 8px;
-}
-.comments .card-body::-webkit-scrollbar-track {
-  background: #f1f1f1;
-  border-radius: 10px;
-}
-.comments .card-body::-webkit-scrollbar-thumb {
-  background: #888;
-  border-radius: 10px;
-}
-.comments .card-body::-webkit-scrollbar-thumb:hover {
-  background: #555;
-}
 .comments .card-body h5,
 .comments .card-body p {
   text-align: start;
@@ -84,24 +73,45 @@ body {
 .product-container .description-container .description table {
   --bs-table-bg: none !important;
 }
-.product-container .description-container .description table tbody, .product-container .description-container .description table td, .product-container .description-container .description table tr {
+.product-container .description-container .description table tbody,
+.product-container .description-container .description table td,
+.product-container .description-container .description table tr {
   border: none !important;
 }
-.product-container .description-container .description table tbody button, .product-container .description-container .description table td button, .product-container .description-container .description table tr button {
+.product-container .description-container .description table tbody button,
+.product-container .description-container .description table td button,
+.product-container .description-container .description table tr button {
   border-radius: 8px;
-  background: #D3A69B;
+  background: rgba(211, 166, 155, 0.7);
   border: 1px solid rgba(68, 61, 56, 0.65);
   color: #000;
   cursor: pointer;
   padding: 10px 20px;
   transition: background 0.3s, border-color 0.3s;
 }
-.product-container .description-container .description table tbody button:hover, .product-container .description-container .description table td button:hover, .product-container .description-container .description table tr button:hover {
+.product-container .description-container .description table tbody button:hover,
+.product-container .description-container .description table td button:hover,
+.product-container .description-container .description table tr button:hover {
   background: #E2BFB3;
   border-color: rgba(96, 86, 79, 0.65);
 }
-.product-container .description-container .description table tbody button:active, .product-container .description-container .description table td button:active, .product-container .description-container .description table tr button:active {
+.product-container .description-container .description table tbody button:active,
+.product-container .description-container .description table td button:active,
+.product-container .description-container .description table tr button:active {
   background-color: #E2BFB3;
+}
+.product-container .description-container .description table .quantity {
+  display: none;
+  width: 100%;
+}
+.product-container .description-container .description table .quantity input[type=number] {
+  border: 1px solid #443d38;
+  width: 50%;
+  border-radius: 3px;
+}
+.product-container .description-container .description table .quantity input[type=number]:focus {
+  border: 1px solid #443d38;
+  outline: none;
 }
 .product-container .description-container .description table tbody > tr > td:nth-child(odd) {
   font-weight: bold;
@@ -115,8 +125,8 @@ body {
   flex-direction: column;
   margin-left: 20px;
 }
-.product-container .description-container .description table .sizes > ul li:hover {
-  background: #D3A69B;
+.product-container .description-container .description table .sizes > ul li:not(.no-hover):hover {
+  background: rgba(211, 166, 155, 0.7);
   padding: 10px;
   border-radius: 3px;
 }
@@ -130,15 +140,14 @@ body {
   font-weight: bold;
 }
 .add-comment .card-body .form textarea {
-  padding: 8px;
   border: none;
   border-bottom: 2px solid #443d38;
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-  background: none;
+  background: rgba(211, 166, 155, 0.7);
+  border-radius: 3px;
   resize: none;
 }
 .add-comment .card-body .form textarea:focus {
-  border: none;
   border-bottom: 2px solid #443d38;
   outline: none;
 }
@@ -167,7 +176,7 @@ body {
 }
 .add-comment .card-body .form button {
   border-radius: 8px;
-  background: #D3A69B;
+  background: rgba(211, 166, 155, 0.7);
   border: 1px solid rgba(68, 61, 56, 0.65);
   color: #000;
   cursor: pointer;

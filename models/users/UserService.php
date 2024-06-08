@@ -15,10 +15,10 @@ class UserService
     /**
      * @throws Exception
      */
-    public function register(UserDTO $userDTO): void
+    public function register(UserDTO $userDTO): int
     {
         $user = $this->createUserFromDTO($userDTO);
-        $this->saveUser($user);
+        return $this->saveUser($user);
     }
     /**
      * @throws Exception
@@ -34,11 +34,11 @@ class UserService
     /**
      * @throws Exception
      */
-    private function saveUser(User $user): void
+    private function saveUser(User $user): false|string
     {
         if($this->repository->findByEmail($user) != [])
             throw new \Exception("Користувач існує");
-        $this->repository->save($user);
+        return $this->repository->save($user);
     }
 
     public function findById(int $id): array
@@ -63,7 +63,8 @@ class UserService
     {
         $validEmail = new Email($userDTO->email);
         $validPassword = $userDTO->password != null ? new Password($userDTO->password) : null;
-        return new User($validEmail, $validPassword, $userDTO->name, $userDTO->lastname, $userDTO->birthday);
+        $validBirthday = $userDTO->birthday != null ? new Birthday($userDTO->birthday) : null;
+        return new User($validEmail, $validPassword, $userDTO->name, $userDTO->lastname, $validBirthday, $userDTO->role_id);
     }
 
 }

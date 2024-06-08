@@ -8,16 +8,16 @@ class ProductDTO
     private string $name;
     private string $description;
     private array $productPhotos;
-    private array $pricesAndSizes;
+    private array $pricesAndSizesAndQuantity;
     private string $minPrice;
     private array $ratingAndComments;
     private float $avgRating;
 
-    public function __construct(string $name, array $pricesAndSizes, string $description,
+    public function __construct(string $name, array $pricesAndSizesAndQuantity, string $description,
                                 array $productPhotos, array $ratingAndComments)
     {
         $this->name = $name;
-        $this->pricesAndSizes = $pricesAndSizes;
+        $this->pricesAndSizesAndQuantity = $pricesAndSizesAndQuantity;
         $this->description = $description;
         $this->productPhotos = $productPhotos;
         $this->ratingAndComments = $ratingAndComments;
@@ -66,13 +66,9 @@ class ProductDTO
 
     public function getPricesAndSizes(): array
     {
-        return $this->pricesAndSizes;
+        return $this->pricesAndSizesAndQuantity;
     }
 
-    public function setPricesAndSizes(array $pricesAndSizes): void
-    {
-        $this->pricesAndSizes = $pricesAndSizes;
-    }
 
     public function getMinPrice(): string
     {
@@ -87,11 +83,6 @@ class ProductDTO
     public function getRatingAndComments(): array
     {
         return $this->ratingAndComments;
-    }
-
-    public function setRatingAndComments(array $ratingAndComments): void
-    {
-        $this->ratingAndComments = $ratingAndComments;
     }
 
     public function getAvgRating(): float

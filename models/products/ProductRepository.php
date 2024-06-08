@@ -67,7 +67,27 @@ class ProductRepository extends Repository
         $product = $this->getProduct($id)[0];
         return $this->createProductDTO($product);
     }
-
+    public function addComment(CommentAndRating $comment): void
+    {
+        $this->db->insert("comments_and_rating", [
+            "product_id" => $comment->getProductId(),
+            "user_id" => $comment->getUserId(),
+            "comment" => $comment->getComment(),
+            "stars" => $comment->getStars()
+        ])->execute();
+    }
+    public function updateProduct(int $product_id, int $productQuantity, string $productSize): void
+    {
+        $size = $this->db->select("sizes", "sizes.id, product_variants.product_quantity")
+            ->join(["product_variants" => "size_id"], ["sizes" => "id"])
+            ->where(["product_id" => $product_id, "size" => $productSize])
+            ->execute()
+            ->returnAssocArray();
+        $quantity = $size[0]["product_quantity"] - $productQuantity;
+        $this->db->update("product_variants", ["product_quantity" => $quantity])
+            ->where(["product_id" => $product_id, "size_id" => $size[0]["id"]])
+            ->execute();
+    }
     /**
      * @throws \Exception
      */
@@ -107,7 +127,7 @@ class ProductRepository extends Repository
         if (!is_array($numbers) || count($numbers) == 0) {
             return 0;
         }
-        return array_sum($numbers) / count($numbers);
+        return round(array_sum($numbers) / count($numbers), 2);
     }
     private function createProductDTO(array $product): ProductDTO
     {
@@ -130,14 +150,14 @@ class ProductRepository extends Repository
     private function getRatingAndComments(int $productId): array
     {
         return $this->db->select("comments_and_rating", "CONCAT(users.name, ' ', users.lastname) as author, comments_and_rating.comment, comments_and_rating.stars")
-            ->join(["users" => "id"], ["comments_and_rating" => "id"])
+            ->join(["users" => "id"], ["comments_and_rating" => "user_id"])
             ->where(["comments_and_rating.product_id" => $productId])
             ->execute()
             ->returnAssocArray();
     }
     private function getSizeAndPriceArray(int $id): array
     {
-        return $this->db->select("sizes", "sizes.size, product_variants.price")
+        return $this->db->select("sizes", "sizes.size, product_variants.price, product_variants.product_quantity as quantity")
             ->join(["product_variants" => "size_id"], ["sizes" => "id"])
             ->join(["products" => "id"], ["product_variants" => "product_id"])
             ->where(["products.id" => $id])
@@ -158,4 +178,5 @@ class ProductRepository extends Repository
             ->where(["products.id" => $id])
             ->execute()->returnAssocArray();
     }
+
 }

@@ -102,19 +102,12 @@ class UserController extends BaseController
         $userInfo = $this->service->findById($user_id);
         $this->showProfile("contact", $userInfo);
     }
-
     public function actionShowAddress(): void
     {
         $this->auth();
         $user_id = Core::getInstance()->getCurrentSession()->get("id");
         $addressesArray = $this->addressService->findByUserId($user_id);
         $this->showProfile("address", $addressesArray);
-    }
-
-    public function actionShowOrders(): void
-    {
-        $this->auth();
-        $this->showProfile("history");
     }
     public function actionUpdateInfo(): void
     {

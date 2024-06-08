@@ -43,6 +43,33 @@ body {
 .form-container .form-field > div {
   margin: 5px;
 }
+.form-container .form-field > div select {
+  width: auto;
+  max-width: max-content;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 16px;
+  background-color: #FEECE2;
+  color: #000;
+  appearance: none;
+}
+.form-container .form-field > div select:hover {
+  border-color: #D3A69B;
+}
+.form-container .form-field > div select:focus {
+  outline: none;
+  border: none;
+  border-bottom: 1px rgba(68, 61, 56, 0.65);
+}
+.form-container .form-field > div select option {
+  padding: 10px;
+  font-size: 16px;
+  background-color: #E2BFB3;
+  color: #000;
+}
+.form-container .form-field > div select option:hover {
+  border-color: #D3A69B;
+}
 .form-container .form-field > div > input {
   border: none;
   border-bottom: 2px solid rgba(68, 61, 56, 0.65);
@@ -57,20 +84,20 @@ body {
 .form-container .form-field > div > input:focus {
   background: none !important;
 }
-.form-container .form-field button {
+.form-container button {
   border-radius: 8px;
-  background: #D3A69B;
+  background: rgba(211, 166, 155, 0.7);
   border: 1px solid rgba(68, 61, 56, 0.65);
   color: #000;
   cursor: pointer;
   padding: 10px 20px;
   transition: background 0.3s, border-color 0.3s;
 }
-.form-container .form-field button:hover {
+.form-container button:hover {
   background: #E2BFB3;
   border-color: rgba(96, 86, 79, 0.65);
 }
-.form-container .form-field button:active {
+.form-container button:active {
   background-color: #E2BFB3;
 }
 .form-container .error {
@@ -94,7 +121,7 @@ body {
   margin-right: 10px;
 }
 .menu-container .user-menu a {
-  background: #D3A69B;
+  background: rgba(211, 166, 155, 0.7);
   border: 1px solid rgba(12, 11, 10, 0.65);
   color: #000;
   text-decoration: none;
@@ -133,7 +160,7 @@ body {
 }
 .filterDate .filter-button {
   border-radius: 8px;
-  background: #D3A69B;
+  background: rgba(211, 166, 155, 0.7);
   border: 1px solid rgba(68, 61, 56, 0.65);
   color: #000;
   cursor: pointer;

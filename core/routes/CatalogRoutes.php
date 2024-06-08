@@ -9,5 +9,6 @@ $catalogRouter->get("/catalog/{artist_name}/", "CatalogController_showArtistCata
 $catalogRouter->get("/catalog/product/{product_id}", "CatalogController_showProductPage");
 
 $catalogRouter->post("/catalog/", "CatalogController_showSortedProducts");
+$catalogRouter->post("/catalog/product/{product_id}", "CatalogController_actionAddCommentAndRating");
 $catalogRouter->post("/catalog/{artist_name}?/", "CatalogController_showSortedProducts");
 return $catalogRouter;

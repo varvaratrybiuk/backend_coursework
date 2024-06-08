@@ -1,0 +1,109 @@
+body {
+  background: #FEECE2 !important;
+  color: #000 !important;
+}
+
+.navbar {
+  background-color: #E2BFB3;
+}
+.navbar .container-fluid .navbar-brand {
+  color: #000 !important;
+}
+
+.nav-item:hover {
+  background-color: rgba(211, 166, 155, 0.6);
+  border-radius: 7px;
+}
+.nav-item .dropdown-menu {
+  background-color: #D3A69B;
+  border: #cb9689;
+}
+.nav-item .dropdown-menu .dropdown-item:hover, .nav-item .dropdown-menu .dropdown-item:focus, .nav-item .dropdown-menu .dropdown-item:active {
+  background-color: #E2BFB3;
+}
+.nav-item img {
+  filter: invert(0%);
+}
+
+.nav-link.active,
+.dropdown-item {
+  color: #000 !important;
+}
+
+.footer {
+  background-color: rgba(226, 191, 179, 0.8);
+}
+
+.cart-container {
+  border: 3px solid rgba(68, 61, 56, 0.65) !important;
+  border-radius: 10px;
+  display: flex;
+  padding: 20px;
+}
+.cart-container .row {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  width: 100%;
+}
+.cart-container .row .products {
+  display: flex;
+  flex-direction: column;
+  height: 50vh;
+  width: auto;
+  overflow-y: auto;
+}
+.cart-container .row .products::-webkit-scrollbar {
+  width: 8px;
+}
+.cart-container .row .products::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+.cart-container .row .products::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 10px;
+}
+.cart-container .row .products::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+.cart-container .row .products ul {
+  list-style: none;
+  padding: 0;
+}
+.cart-container .row .products ul li {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+.cart-container .row .products ul img {
+  max-width: 100px;
+}
+.cart-container .row .finale {
+  display: flex;
+  flex-direction: column;
+}
+.cart-container .row .finale p {
+  margin: 0;
+}
+.cart-container .row .finale a {
+  border-radius: 8px;
+  background: rgba(211, 166, 155, 0.7);
+  border: 1px solid rgba(68, 61, 56, 0.65);
+  color: #000;
+  cursor: pointer;
+  padding: 10px 20px;
+  transition: background 0.3s, border-color 0.3s;
+}
+.cart-container .row .finale a:hover {
+  background: #E2BFB3;
+  border-color: rgba(96, 86, 79, 0.65);
+}
+.cart-container .row .finale a:active {
+  background-color: #E2BFB3;
+}
+
+.content {
+  width: 50% !important;
+}
+
+/*# sourceMappingURL=cart_and_payment.css.map */

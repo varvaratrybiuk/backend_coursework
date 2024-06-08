@@ -144,4 +144,8 @@ class DataBase
     {
         return $this->result;
     }
+    public function lastInsertId(): false|string
+    {
+        return $this->pdo->lastInsertId();
+    }
 }

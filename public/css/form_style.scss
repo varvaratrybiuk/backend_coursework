@@ -1,28 +1,55 @@
 @import "main_page_style";
 @import "input_button_style";
+
 .form-container {
   border: 2px solid #443d38;
   padding: 20px;
   border-radius: 10px;
   margin: 20px;
 
-  .form-field {
-    > div {
-      margin: 5px;
+  .form-field > div {
+    margin: 5px;
+    select {
+      width: auto;
+      max-width: max-content;
+      padding: 10px;
+      border-radius: 5px;
+      font-size: 16px;
+      background-color: $Body;
+      color: $font;
+      appearance: none;
 
-      > input {
-        @include input-focus($border-color);
-
-        &:focus{
-          background: none !important;
-        }
+      &:hover {
+        border-color: $hover;
       }
 
+      &:focus {
+        outline: none;
+        border: none;
+        border-bottom: 1px $border-color;
+      }
     }
 
-    button {
-      @include button-style($primary-bg, $secondary-bg, $border-color, $text-color);
+    select option {
+      padding: 10px;
+      font-size: 16px;
+      background-color: $items;
+      color: $font;
+      &:hover {
+        border-color: $hover;
+      }
     }
+    > input {
+      @include input-focus($border-color);
+
+      &:focus {
+        background: none !important;
+      }
+    }
+  }
+
+  button {
+    @include button-style($primary-bg, $secondary-bg, $border-color, $text-color);
   }
 
   .error {

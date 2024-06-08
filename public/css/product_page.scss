@@ -2,44 +2,29 @@
 @import "input_button_style";
 @import "pages_style";
 
+.active-li{
+  background: $primary-bg;
+  padding: 10px;
+  border-radius: 3px;
+}
 .card-header {
   background-color: #866860;
   color: #000;
 }
-.card{
+
+.card {
   background-color: transparent !important;
 }
+
 .card-body {
   color: #000;
 }
 
-
-.comments {
-  .card-body {
-    overflow-y: scroll;
-    &::-webkit-scrollbar {
-      width: 8px;
-    }
-
-    &::-webkit-scrollbar-track {
-      background: #f1f1f1;
-      border-radius: 10px;
-    }
-
-    &::-webkit-scrollbar-thumb {
-      background: #888;
-      border-radius: 10px;
-    }
-
-    &::-webkit-scrollbar-thumb:hover {
-      background: #555;
-    }
-    h5,
-    p {
-      text-align: start;
-    }
+.comments .card-body {
+  h5,
+  p {
+    text-align: start;
   }
-
 }
 
 .product-container {
@@ -57,15 +42,35 @@
     .description {
       table {
         --bs-table-bg: none !important;
-        tbody, td, tr{
+
+        tbody,
+        td,
+        tr {
           border: none !important;
+
           button {
             @include button-style($primary-bg, $secondary-bg, $border-color, $font);
           }
         }
-        tbody > tr > td:nth-child(odd){
+
+        .quantity {
+          display: none;
+          width: 100%;
+          input[type="number"]{
+            border: 1px solid #443d38;
+            width: 50%;
+            border-radius: 3px;
+            &:focus{
+              border: 1px solid #443d38;
+              outline: none;
+            }
+          }
+        }
+
+        tbody > tr > td:nth-child(odd) {
           font-weight: bold;
         }
+
         .sizes > ul {
           padding: 0;
           list-style: none;
@@ -74,72 +79,70 @@
           li {
             flex-direction: column;
             margin-left: 20px;
-          }
-          li:hover {
-           background: $primary-bg;
-            padding: 10px;
-            border-radius: 3px;
+            &:not(.no-hover):hover {
+              background: $primary-bg;
+              padding: 10px;
+              border-radius: 3px;
+            }
           }
         }
       }
     }
   }
 }
-.add-comment {
-  .card-body {
-    .form {
-      .row {
-        margin-bottom: 16px;
-        display: flex;
-        padding: 20px;
-      }
 
-      label {
-        font-weight: bold;
-      }
+.add-comment .card-body .form {
+  .row {
+    margin-bottom: 16px;
+    display: flex;
+    padding: 20px;
+  }
 
-      textarea {
-        padding: 8px;
-        border: none;
-        border-bottom: 2px solid #443d38;
-        transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-        background: none;
-        resize: none;
-      }
-      textarea:focus {
-        border: none;
-        border-bottom: 2px solid #443d38;
-        outline: none;
-      }
-      input[type="range"] {
-        width: min-content;
-        cursor: pointer;
-        appearance: none;
-        height: 8px;
-        border-radius: 4px;
-        background: #f6f5f2;
-        outline: none;
-        transition: background 0.2s;
-      }
+  label {
+    font-weight: bold;
+  }
 
-      input[type="range"]::-webkit-slider-thumb {
-        appearance: none;
-        width: 16px;
-        height: 16px;
-        border-radius: 50%;
-        background: #443d38;
-        cursor: pointer;
-      }
-      output {
-        display: block;
-        margin-top: 8px;
-        font-weight: bold;
-      }
-      button {
-        @include button-style($primary-bg, $secondary-bg, $border-color, $font);
-        width: 145px;
-        height: max-content;
-      }
+  textarea {
+    border: none;
+    border-bottom: 2px solid #443d38;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    background: $primary-bg;
+    border-radius: 3px;
+    resize: none;
+    &:focus {
+      border-bottom: 2px solid #443d38;
+      outline: none;
     }
+  }
+  input[type="range"] {
+    width: min-content;
+    cursor: pointer;
+    appearance: none;
+    height: 8px;
+    border-radius: 4px;
+    background: #f6f5f2;
+    outline: none;
+    transition: background 0.2s;
+
+    &::-webkit-slider-thumb {
+      appearance: none;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: #443d38;
+      cursor: pointer;
+    }
+  }
+
+  output {
+    display: block;
+    margin-top: 8px;
+    font-weight: bold;
+  }
+
+  button {
+    @include button-style($primary-bg, $secondary-bg, $border-color, $font);
+    width: 145px;
+    height: max-content;
   }
 }

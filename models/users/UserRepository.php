@@ -10,16 +10,18 @@ class UserRepository extends Repository
     {
         parent::__construct();
     }
-    public function save(User $user): void
+    public function save(User $user): string|false
     {
         $this->db->insert("users",
             [   "email"=> (string)$user->getEmail(),
+                "role_id" => $user->getRoleId(),
                 "password" => (string)$user->getPassword(),
                 "name" => $user->getName(),
                 "lastname" => $user->getLastname(),
-                "birthday" => $user->getBirthday()
+                "birthday" => (string)$user->getBirthday()
             ]
         )->execute();
+        return $this->db->lastInsertId();
     }
     public function findByEmail(User $user): array
     {

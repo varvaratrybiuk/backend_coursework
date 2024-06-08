@@ -11,7 +11,7 @@ class User
     private ?Password $password;
     private ?string $name;
     private ?string $lastname;
-    private ?string $birthday;
+    private ?Birthday $birthday;
     public function __construct(?Email $email = null, ?Password $password = null, ?string $name = null, ?string $lastname = null, ?string $birthday = null, ?int $role_id = null)
     {
         $this->email = $email;
@@ -21,7 +21,7 @@ class User
         $this->birthday = $birthday;
         $this->role_id = $role_id;
     }
-    public function getRoleId()
+    public function getRoleId(): ?int
     {
         return $this->role_id;
     }
@@ -30,7 +30,7 @@ class User
         return $this->email;
     }
 
-    public function getPassword(): Password
+    public function getPassword(): Password|null
     {
         return $this->password;
     }
@@ -45,7 +45,7 @@ class User
         return $this->lastname;
     }
 
-    public function getBirthday()
+    public function getBirthday(): Birthday|null
     {
         return $this->birthday;
     }

@@ -10,11 +10,11 @@
                 </div>
                 <div>
                     <label>
-                        <input type="radio" name="sortPrice" value="ASC" <?= isset($_GET['sortPrice']) && $_GET['sortPrice'] == 'ASC' ? 'checked' : '' ?>>
+                        <input type="radio" name="sortPrice" value="ASC">
                         Від дешевших до дорожчих
                     </label>
                     <label>
-                        <input type="radio" name="sortPrice" value="DESC" <?= isset($_GET['sortPrice']) && $_GET['sortPrice'] == 'DESC' ? 'checked' : '' ?>>
+                        <input type="radio" name="sortPrice" value="DESC">
                         Від дорожчих до дешевших
                     </label>
                 </div>
@@ -25,11 +25,11 @@
                 </div>
                 <div>
                     <label>
-                        <input type="radio" name="sortRating" value="ASC" <?= isset($_GET['sortRating']) && $_GET['sortRating'] == 'ASC' ? 'checked' : '' ?>>
+                        <input type="radio" name="sortRating" value="ASC">
                         Від нижчого до вищого
                     </label>
                     <label>
-                        <input type="radio" name="sortRating" value="DESC" <?= isset($_GET['sortRating']) && $_GET['sortRating'] == 'DESC' ? 'checked' : '' ?>>
+                        <input type="radio" name="sortRating" value="DESC">
                         Від вищого до нижчого
                     </label>
                 </div>
@@ -39,7 +39,7 @@
     </div>
     <div class="product-grid" id = "product-grid">
         <?php foreach ($productObjects as $productObject):?>
-            <div class="card col" style="width: 18rem;">
+            <div class="card col" style="width: 100%;">
                 <div id="<?= $productObject->getId() ?>" class="carousel carousel-dark slide">
                     <div class="carousel-indicators">
                         <?php if(count($productObject->getProductPhotos()) > 1):?>

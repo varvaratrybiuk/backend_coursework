@@ -10,7 +10,7 @@ class AddressRepository extends Repository
     {
         parent::__construct();
     }
-    public function save(AddressInformation $addressInformation): void
+    public function save(AddressInformation $addressInformation): string|false
     {
         $address = $addressInformation->getAddress();
         $this->db->insert("address_information", [
@@ -20,6 +20,7 @@ class AddressRepository extends Repository
             "street" => $address->getStreet(),
             "zip_code" => $address->getZipCode()
         ])->execute();
+        return $this->db->lastInsertId();
     }
     private function convertToAddressInformation(array $data): AddressInformation
     {
@@ -31,9 +32,9 @@ class AddressRepository extends Repository
         );
 
         return new AddressInformation(
-            $data['id'],
+            $address,
             $data['user_id'],
-            $address
+            $data["id"]
         );
     }
     private function convertToAddressInformationArray(array $data): array

@@ -1,5 +1,5 @@
 <?php
-/** @var array $addresses */
+/** @var array|null $addresses */
 ?>
 <div class="container-md">
     <h3>Доступні адреси</h3>
@@ -11,14 +11,16 @@
         </tr>
         </thead>
         <tbody>
-        <?php $count = 1; ?>
-        <?php foreach($addresses as $address): ?>
-            <tr>
-                <th scope="row"><?= $count ?></th>
-                <td><?= $address ?></td>
+        <?php if(isset($addresses)):?>
+            <?php $count = 1; ?>
+            <?php foreach($addresses as $index => $address): ?>
+                <tr>
+                    <th scope="row"><?= $count ?></th>
+                    <td><?= $address ?></td>
             </tr>
             <?php $count++; ?>
         <?php endforeach; ?>
+        <?php endif;?>
         </tbody>
     </table>
 </div>

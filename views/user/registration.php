@@ -42,7 +42,7 @@
                 <label for="regbirthday">Дата народження:</label>
             </div>
             <div class="col auto">
-                <input type="date" id="regbirthday" name="regbirthday" required>
+                <input type="date" id="regbirthday" name="regbirthday">
             </div>
         </div>
         <div class="row g-1 form-field">
