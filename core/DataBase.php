@@ -19,6 +19,7 @@ class DataBase
     ];
     private string $join = "";
     private string $orderBy = "";
+    private string $set = "";
     private string $groupBy = "";
     public function __construct($host, $dbname, $username, $password)
     {
@@ -35,7 +36,7 @@ class DataBase
 
     private function prepareQuery(array $data): PDOStatement|false
     {
-        $this->sql .= $this->queryParts['sqlQuery'] . $this->join . $this->where . $this->orderBy . $this->groupBy;
+        $this->sql .= $this->queryParts['sqlQuery'] . $this->join . $this->set . $this->where . $this->orderBy . $this->groupBy;
         $preparedQuery = $this->pdo->prepare($this->sql);
         foreach ($data as $key => $value) {
             $preparedQuery->bindValue("$key", $value);
@@ -65,13 +66,19 @@ class DataBase
         return $this;
     }
 
-    public function update(string $tableName, array $columnsAndValues): self
+    public function update(string $tableName): self
     {
+        $this->queryParts['sqlQuery'] .= " UPDATE $tableName ";
+        return $this;
+    }
+    public function set(array $columnsAndValues): self
+    {
+        $conditions = [];
         foreach ($columnsAndValues as $fieldName => $fieldValue) {
             $this->queryParts['parameters'][":$fieldName"] = $fieldValue;
             $conditions[] = "$fieldName = :$fieldName";
         }
-        $this->queryParts['sqlQuery'] .= " UPDATE $tableName SET " . implode(", ", $conditions);
+        $this->set = " SET " . implode(", ", $conditions)." ";
         return $this;
     }
     public function where(array $fieldsWithValues, array $marks = [], string $operator = "AND"): self
@@ -135,6 +142,7 @@ class DataBase
         $this->where = "";
         $this->orderBy = "";
         $this->groupBy = "";
+        $this->set = "";
     }
     public function returnJson(): false|string
     {

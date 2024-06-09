@@ -44,6 +44,12 @@
                     <ul class="dropdown-menu">
                         <?php if(\core\Core::getInstance()->getCurrentSession()->userIsLoggedIn()):?>
                             <li><a class="dropdown-item" href="http://merchua/profile/contact">Профіль</a></li>
+                            <?php if (\core\Core::getInstance()->getCurrentSession()->userIsAdmin()):?>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="http://merchua/admin/update">Оновити ціну та к-сть</a></li>
+                                <li><a class="dropdown-item" href="http://merchua/admin/update_status">Оновити статус замовлень</a></li>
+                                <li><a class="dropdown-item" href="http://merchua/admin/add">Додати продукт</a></li>
+                            <?php endif; ?>
                             <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item" href="http://merchua/logout">Вихід</a></li>
                         <?php else: ?>

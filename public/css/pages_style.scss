@@ -145,3 +145,58 @@
     grid-gap: 1rem;
   }
 }
+@mixin table-style(){
+  .table-container {
+    max-height: 600px;
+    overflow-y: auto;
+
+    table {
+      border: 2px solid $border-color !important;
+      border-radius: 10px;
+      overflow: hidden;
+      width: 100%;
+
+      thead {
+        --bs-table-bg: #ab8b84 !important;
+        color: $text-color;
+        background-color: #ab8b84;
+      }
+
+      tbody {
+        border-radius: 10px;
+        tr:nth-child(odd) {
+          --bs-table-bg: rgba(245, 208, 195, 0.62) !important;
+        }
+
+        tr:nth-child(even) {
+          --bs-table-bg: rgba(217, 175, 166, 0.62) !important;
+        }
+      }
+    }
+    &::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: #f1f1f1;
+      border-radius: 10px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: #888;
+      border-radius: 10px;
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+      background: #555;
+    }
+  }
+  .filterDate {
+    display: flex;
+    gap: 10px;
+
+    .filter-button {
+      @include button-style($primary-bg, $secondary-bg, $border-color, $text-color);
+    }
+  }
+}

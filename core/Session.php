@@ -22,9 +22,15 @@ class Session
     public function unset(): void
     {
         unset($_SESSION['id']);
+        unset($_SESSION['admin']);
     }
     public function userIsLoggedIn(): bool
     {
         return (bool)$this->get('id');
     }
+    public function userIsAdmin(): bool
+    {
+        return (bool)$this->get('admin');
+    }
+
 }

@@ -1,7 +1,7 @@
 <?php
 /** @var array|null $addresses */
 ?>
-<div class="container-md">
+<div class="container-md table-container">
     <h3>Доступні адреси</h3>
     <table class=" address-table table ">
         <thead>

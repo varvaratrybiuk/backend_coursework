@@ -44,18 +44,19 @@ class PaymentController extends BaseController
         $userId = Core::getInstance()->getCurrentSession()->get("id");
         $userData = json_decode(Request::getPost("json"), true);
         $productInformList = $this->createProductInformList($userData);
-        $addressId = $this->getAddressId($userId);
         $orderDate = date('Y-m-d');
         $orderDTO = new OrderDTO($orderDate, $productInformList);
 
         try {
             if (!Core::getInstance()->getCurrentSession()->userIsLoggedIn()) {
-                $this->processGuestOrder($orderDTO, $addressId);
+                $this->processGuestOrder($orderDTO);
             } else {
+                $addressId = $this->getAddressId($userId);
                 $this->orderService->addUserOrder($addressId, $userId, $orderDTO);
             }
         } catch (\Exception $e) {
             $this->view->renderJson(["error" => $e->getMessage()]);
+            die();
         }
         $this->view->renderJson(["done" => true]);
     }
@@ -76,21 +77,24 @@ class PaymentController extends BaseController
     {
         $addressId = Request::getPost('addressId');
         if (empty($addressId)) {
-            $country = Request::getPost('country');
-            $city = Request::getPost('city');
-            $street = Request::getPost('street');
-            $zipCode = Request::getPost('zip_code');
-            $addressDTO = new AddressDTO($country, $city, $street, $zipCode);
+            $addressDTO = $this->getAddressDTO();
             if(Core::getInstance()->getCurrentSession()->userIsLoggedIn())
                 $addressId = $this->addressService->addAddress($addressDTO, $userId);
         }
         return $addressId;
     }
-
+    private function getAddressDTO(): AddressDTO
+    {
+        $country = Request::getPost('country');
+        $city = Request::getPost('city');
+        $street = Request::getPost('street');
+        $zipCode = Request::getPost('zip_code');
+        return new AddressDTO($country, $city, $street, $zipCode);
+    }
     /**
      * @throws \Exception
      */
-    private function processGuestOrder($orderDTO, $addressId): void
+    private function processGuestOrder($orderDTO): void
     {
         $firstName = Request::getPost('first_name');
         $lastName = Request::getPost('last_name');
@@ -103,6 +107,7 @@ class PaymentController extends BaseController
             null,
             3
         );
-        $this->orderService->addGuestOrder($newUser, $orderDTO,  $addressId);
+        $addressDTO = $this->getAddressDTO();
+        $this->orderService->addGuestOrder($newUser, $orderDTO,  $addressDTO);
     }
 }

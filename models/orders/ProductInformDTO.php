@@ -25,7 +25,7 @@ class ProductInformDTO
         return $this->quantity;
     }
 
-    public function getSizeId(): string
+    public function getSize(): string
     {
         return $this->size;
     }

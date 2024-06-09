@@ -95,7 +95,7 @@ $pricesAndSizesJSON = json_encode($pricesAndSizes);
                     Додати коментар
                 </div>
                 <div class="card-body">
-                    <form class="form">
+                    <form class="form" method="POST">
                         <div class="mb-3 row">
                             <label for="comment">Коментар: </label>
                             <textarea  id="comment" name="comment" rows="3" placeholder="Додайте сюди коментар"></textarea>
@@ -116,7 +116,7 @@ $pricesAndSizesJSON = json_encode($pricesAndSizes);
         <div class="col-md-6 comments">
             <div class="card mt-4">
                 <div class="card-header">
-                    Comments
+                   Коментарі
                 </div>
                 <div>
                     <?php foreach ($productObject->getRatingAndComments() as $comment): ?>
@@ -137,6 +137,7 @@ $pricesAndSizesJSON = json_encode($pricesAndSizes);
         const sizesArray = document.querySelectorAll(".sizes li");
         const buyButton = document.querySelector(".addToBasket");
         const price = document.querySelector(".price");
+        const content = document.querySelector(".content");
         const quantityInput = document.querySelector(".productNum");
         const productInformArray = <?=$pricesAndSizesJSON?>;
         updatePriceAndQuantity(0);
@@ -173,7 +174,23 @@ $pricesAndSizesJSON = json_encode($pricesAndSizes);
             price.textContent = productInformArray[index].price + " ГРН";
             quantityBox.style.display = "table-row";
         }
-
+        const commentForm = document.querySelector('.add-comment form');
+        if (commentForm != null) {
+            commentForm.addEventListener('submit', (event) => {
+                event.preventDefault();
+                const formData = new FormData(commentForm);
+                fetch(window.location.href, {
+                    method: 'POST',
+                    body: formData
+                }).then(response => {
+                    return response.text();
+                }).then(data => {
+                    content.innerHTML = data;
+                }).catch(error => {
+                    console.error('Помилка', error);
+                })
+            });
+        }
         buyButton.addEventListener("click",() => {
             let cart = JSON.parse(localStorage.getItem('<?=$user_id?>')) || [];
             let productId = <?= $productObject->getId() ?>;
@@ -199,34 +216,6 @@ $pricesAndSizesJSON = json_encode($pricesAndSizes);
                 }
             }
             localStorage.setItem('<?=$user_id?>', JSON.stringify(cart));
-
-            const commentForm = document.querySelector('.add-comment form');
-            if (commentForm != null) {
-                commentForm.addEventListener('submit', (event) => {
-                    event.preventDefault();
-                    const formData = new FormData(commentForm);
-                    fetch(window.location.href, {
-                        method: 'POST',
-                        body: formData
-                    }).then(response => {
-                        return response.json();
-                    }).then(data => {
-                        const commentsContainer = document.querySelector('.comments .card > div:last-child');
-                        commentsContainer.innerHTML = '';
-                        data.forEach(comment => {
-                            const newCommentElement = document.createElement('div');
-                            newCommentElement.classList.add("card-body");
-                            newCommentElement.innerHTML = `
-                            <h5 class="card-title">${comment.author}</h5>
-                            <p class="card-text">Оцінка: ${comment.stars}</p>
-                            <p class="card-text">${comment.comment}</p>`;
-                            commentsContainer.appendChild(newCommentElement);
-                        });
-                    }).catch(error => {
-                        console.error('Помилка', error);
-                    })
-                });
-            }
         })
     });
 </script>

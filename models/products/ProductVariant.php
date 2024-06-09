@@ -10,9 +10,8 @@ class ProductVariant
     private int $productQuantity;
     private Price $price;
 
-    public function __construct(int $id, int $productId, int $sizeId, int $productQuantity, Price $price)
+    public function __construct( int $productId, int $sizeId, int $productQuantity, Price $price)
     {
-        $this->id = $id;
         $this->productId = $productId;
         $this->sizeId = $sizeId;
         $this->productQuantity = $productQuantity;
@@ -39,8 +38,8 @@ class ProductVariant
         return $this->productQuantity;
     }
 
-    public function getPrice(): Price
+    public function getPrice(): float
     {
-        return $this->price;
+        return $this->price->getAmount();
     }
 }

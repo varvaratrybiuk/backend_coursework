@@ -1,5 +1,5 @@
 body {
-  background: #FEECE2 !important;
+  background: #feece2 !important;
   color: #000 !important;
 }
 
@@ -47,8 +47,8 @@ body {
 }
 .card .card-body a {
   border-radius: 8px;
-  background: #FEECE2;
-  border: 1px solid #FEECE2;
+  background: #feece2;
+  border: 1px solid #feece2;
   color: #000;
   cursor: pointer;
   padding: 10px 20px;
@@ -123,8 +123,8 @@ body {
 }
 .sorting-container .form button {
   border-radius: 8px;
-  background: #FEECE2;
-  border: 1px solid #FEECE2;
+  background: #feece2;
+  border: 1px solid #feece2;
   color: #000;
   cursor: pointer;
   padding: 10px 20px;

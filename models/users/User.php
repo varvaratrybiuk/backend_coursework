@@ -12,7 +12,7 @@ class User
     private ?string $name;
     private ?string $lastname;
     private ?Birthday $birthday;
-    public function __construct(?Email $email = null, ?Password $password = null, ?string $name = null, ?string $lastname = null, ?string $birthday = null, ?int $role_id = null)
+    public function __construct(?Email $email = null, ?Password $password = null, ?string $name = null, ?string $lastname = null, ?Birthday $birthday = null, ?int $role_id = null)
     {
         $this->email = $email;
         $this->password = $password;

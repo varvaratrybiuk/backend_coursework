@@ -62,7 +62,10 @@ class UserController extends BaseController
             $email = Request::getPost('logemail');
             $password = Request::getPost('logpassword');
             $user_id = $this->service->login($email, $password);
-            Core::getInstance()->getCurrentSession()->add("id", $user_id);
+          Core::getInstance()->getCurrentSession()->add("id", $user_id);
+            Core::getInstance()->getCurrentSession()->add("admin",
+                $this->service->isAdmin($user_id));
+
             $this->view->renderJson(["redirect" => "/"]);
         });
     }

@@ -1,6 +1,8 @@
 @import "main_page_style";
 @import "input_button_style";
+@import "pages_style";
 
+@include table-style();
 .form-container {
   border: 2px solid #443d38;
   padding: 20px;
@@ -17,6 +19,7 @@
       font-size: 16px;
       background-color: $Body;
       color: $font;
+      appearance: none;
 
       &:hover {
         border-color: $hover;
@@ -24,8 +27,6 @@
 
       &:focus {
         outline: none;
-        border: none;
-        border-bottom: 1px $border-color;
       }
     }
 
@@ -37,26 +38,42 @@
       &:hover {
         border-color: $hover;
       }
-    }
-    > input {
-      @include input-focus($border-color);
 
+    }
+    > input[type="text"] {
+      @include input-focus($border-color);
       &:focus {
         background: none !important;
       }
     }
+    input[type="number"]{
+      border: 1px solid #443d38;
+      width: 50%;
+      border-radius: 3px;
+      &:focus{
+        border: 1px solid #443d38;
+        outline: none;
+      }
+    }
+    textarea {
+      border: none;
+      border-bottom: 2px solid #443d38;
+      transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+      border-radius: 3px;
+      resize: none;
+      background: none !important;
+      &:focus {
+        border-bottom: 2px solid #443d38;
+        outline: none;
+      }
+    }
   }
 
-  button {
-    @include button-style($primary-bg, $secondary-bg, $border-color, $text-color);
-  }
 
-  .error {
-    color: darkred;
-    border-radius: 2px;
-  }
 }
-
+button {
+  @include button-style($primary-bg, $secondary-bg, $border-color, $text-color);
+}
 .content {
-  width: max-content !important;
+  width: 100%!important;
 }

@@ -7,25 +7,29 @@ use http\Exception;
 
 class ProductRepository extends Repository
 {
+    private ArtistRepository $artistRepository;
+    private PhotosRepository $photosRepository;
     public function __construct()
     {
         parent::__construct();
+        $this->artistRepository =  new ArtistRepository();
+        $this->photosRepository = new PhotosRepository();
     }
-
-    /**
-     * @throws \Exception
-     */
-    public function isArtistExist(?string $artistName)
+    public function save(Product $product): false|string
     {
-        return $this->getArtistId($artistName);
+        $this->db->insert("products", [
+            "artist_id" => $product->getArtistId(),
+            "product_name"=> $product->getProductName(),
+            "description" => $product->getDescription()
+        ])->execute();
+        return $this->db->lastInsertId();
     }
-
     /**
      * @throws \Exception
      */
     public function sortByDefinition(?string $artistName, ?string $sortByPrice, ?string $sortByRating): array
     {
-        $artist_id = $this->isArtistExist($artistName);
+        $artist_id = $this->artistRepository->isArtistExist($artistName);
         $products = $this->getProducts($artist_id);
         $dtos = $this->createProductDTOs($products);
         $sortOptions = ['ASC', 'DESC'];
@@ -48,16 +52,14 @@ class ProductRepository extends Repository
         }
         return $dtos;
     }
-    private function getMinPriceFromPricesAndSizes(array $pricesAndSizes): float {
-        return min(array_column($pricesAndSizes, 'price'));
-    }
+
 
     /**
      * @throws \Exception
      */
     public function findAllProducts(?string $artistName): array
     {
-        $artist_id = $this->isArtistExist($artistName);
+        $artist_id = $this->artistRepository->isArtistExist($artistName);
         $products = $this->getProducts($artist_id);
         return $this->createProductDTOs($products);
     }
@@ -84,27 +86,22 @@ class ProductRepository extends Repository
             ->execute()
             ->returnAssocArray();
         $quantity = $size[0]["product_quantity"] - $productQuantity;
-        $this->db->update("product_variants", ["product_quantity" => $quantity])
+        $this->db->update("product_variants")
+            ->set(["product_quantity" => $quantity])
             ->where(["product_id" => $product_id, "size_id" => $size[0]["id"]])
             ->execute();
     }
     /**
      * @throws \Exception
      */
-    private function getArtistId(?string $artistName)
-    {
-        $id  = null;
-        if ($artistName != null) {
-            $artists = $this->db->select("artist")->execute()->returnAssocArray();
-            $artistIds = array_column($artists, 'artist_id', 'artist_name');
-            $id = $artistIds[$artistName] ?? null;
-            if($id == null){
-                throw new \Exception("Артист не присутній в магазині");
-            }
-        }
-        return $id;
-    }
 
+    private function getMinPriceFromPricesAndSizes(array $pricesAndSizes): float {
+        $prices = array_column($pricesAndSizes, 'price');
+        if (!empty($prices)) {
+            return min($prices);
+        }
+        return 0;
+    }
     private function getProducts(?int $artist_id): array
     {
         $query = $this->db->select("products", "id, product_name, description");
@@ -133,7 +130,7 @@ class ProductRepository extends Repository
     {
         $id = $product['id'];
         $sizeAndPriceArray = $this->getSizeAndPriceArray($id);
-        $photosArray = $this->getPhotosArray($id);
+        $photosArray = $this->photosRepository->getPhotosArray($id);
         $commentsAndRating = $this->getRatingAndComments($id);
         $finaleProduct = new ProductDTO(
             $product['product_name'],
@@ -160,14 +157,6 @@ class ProductRepository extends Repository
         return $this->db->select("sizes", "sizes.size, product_variants.price, product_variants.product_quantity as quantity")
             ->join(["product_variants" => "size_id"], ["sizes" => "id"])
             ->join(["products" => "id"], ["product_variants" => "product_id"])
-            ->where(["products.id" => $id])
-            ->execute()->returnAssocArray();
-    }
-
-    private function getPhotosArray(int $id): array
-    {
-        return $this->db->select("photo_storage", "photo_filepath")
-            ->join(["products" => "id"], ["photo_storage" => "product_id"])
             ->where(["products.id" => $id])
             ->execute()->returnAssocArray();
     }

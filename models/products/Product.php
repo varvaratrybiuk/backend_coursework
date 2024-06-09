@@ -9,14 +9,12 @@ class Product
     private string $productName;
     private string $description;
 
-    public function __construct(int $id, int $artistId, string $productName, string $description)
+    public function __construct(int $artistId, string $productName, string $description)
     {
-        $this->id = $id;
         $this->artistId = $artistId;
         $this->productName = $productName;
         $this->description = $description;
     }
-
     public function getId(): int
     {
         return $this->id;

@@ -5,10 +5,14 @@ namespace models\products;
 class ProductService
 {
     private ProductRepository $productRepository;
+    private PhotosRepository $photosRepository;
+    private ProductVariantRepository $variantRepository;
 
     public function __construct()
     {
         $this->productRepository = new ProductRepository();
+        $this->photosRepository = new PhotosRepository();
+        $this->variantRepository = new ProductVariantRepository();
     }
     public function addComment(int $productId, string $comment, int $userId, int $rating) : array
     {
@@ -46,5 +50,21 @@ class ProductService
     public function updateProduct(int $productId, int $productQuantity, string $productSize): void
     {
         $this->productRepository->updateProduct($productId, $productQuantity, $productSize);
+    }
+    public function saveProductAndPhotos(int $artist_id, string $name, string $description, array $photos): void
+    {
+        $product = new Product($artist_id,  $name,  $description);
+        $id = $this->productRepository->save($product);
+        $this->photosRepository->savePhotos($id, $photos);
+    }
+    public function addVariants(int $productId, int $sizeId, int $productQuantity, float $price): void
+    {
+        $validPrice = new Price($price);
+        $productVariant = new ProductVariant($productId, $sizeId, $productQuantity,  $validPrice);
+        $this->variantRepository->saveVariant($productVariant);
+    }
+    public  function updateVariants(array $data)
+    {
+        $this->variantRepository->updateProductsVariant($data);
     }
 }

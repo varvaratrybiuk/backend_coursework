@@ -41,16 +41,22 @@ class Address
     {
         return "{$this->country}  {$this->city}, {$this->street}: {$this->zipCode} ";
     }
+    /**
+     * @throws \Exception
+     */
     private function ensureIsValidCountry(string $country): void
     {
         if ($country !== 'Україна') {
-            throw new \InvalidArgumentException("Доставка тільки по Україні.");
+            throw new \Exception("Доставка тільки по Україні.");
         }
     }
+    /**
+     * @throws \Exception
+     */
     private function ensureIsValidZipCode(string $zipCode): void
     {
         if (!preg_match('/^\d{5}$/', $zipCode)) {
-            throw new \InvalidArgumentException("Недійсний формат поштового індексу. Індекс повинен містити 5 цифр.");
+            throw new \Exception("Недійсний формат поштового індексу. Індекс повинен містити 5 цифр.");
         }
     }
 

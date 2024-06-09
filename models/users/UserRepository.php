@@ -33,11 +33,15 @@ class UserRepository extends Repository
     }
     public function updateUser(User $user): void
     {
-        $this->db->update("users",[   "email"=> (string)$user->getEmail(),
-                "name" => $user->getName(),
-                "lastname" => $user->getLastname(),
-                "birthday" => $user->getBirthday()
-            ]
-        )->where(["id" => $user->getId()])->execute();
+        $this->db->update("users")->set([ "email"=> (string)$user->getEmail(),
+            "name" => $user->getName(),
+            "lastname" => $user->getLastname(),
+            "birthday" => $user->getBirthday()
+        ])->where(["id" => $user->getId()])->execute();
+    }
+    public function gerUserRoleId(int $user_id)
+    {
+        return $this->db->select("users", "role_id")
+            ->where(["id" => $user_id])->execute()->returnAssocArray()[0];
     }
 }

@@ -47,4 +47,20 @@ class OrderService
         $orderDTO->setAddressId($this->addressService->addAddress($addressDTO, $user_id));
         $this->saveOrder($orderDTO);
     }
+    public function getAllUsersOrders(): array
+    {
+       return $this->repository->getAllUsersOrders();
+    }
+    public function getAllOrdersProducts(): array
+    {
+       return $this->repository->getAllOrdersProducts();
+    }
+    public function getOrdersStatuses(): array
+    {
+        return $this->repository->getOrdersStatuses();
+    }
+    public function updateStatus(int $orderId, int $statusId)
+    {
+        $this->repository->updateStatus($orderId, $statusId);
+    }
 }

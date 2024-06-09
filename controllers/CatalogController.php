@@ -80,7 +80,11 @@ class CatalogController extends BaseController
             $user_id = Core::getInstance()->getCurrentSession()->get("id");
             $comment = Request::getPost("comment");
             $star = Request::getPost("rating");
-            $this->view->renderJson($this->productService->addComment($product_id, $comment, $user_id, $star));
+            $this->productService->addComment($product_id, $comment,  $user_id,  $star );
+            $this->tryCatchWrapper(function() use ($product_id) {
+                $result = $this->productService->getProductById($product_id);
+                $this->view->renderTemplateWithout("views/catalog/productpage.php", ["productObject" => $result]);
+            });
         }, 500);
     }
 }

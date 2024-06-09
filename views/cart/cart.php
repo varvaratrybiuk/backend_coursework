@@ -8,6 +8,7 @@ $user_id = \core\Core::getInstance()->getCurrentSession()->get("id") ?? "guest";
     document.addEventListener("DOMContentLoaded", () => {
         const container = document.getElementById("content");
         const parentContainer = document.querySelector(".cart-container");
+
         const userId = "<?= $user_id ?>" ;
         const userItems = [];
         for (let i = 0; i < localStorage.length; i++) {
@@ -41,13 +42,20 @@ $user_id = \core\Core::getInstance()->getCurrentSession()->get("id") ?? "guest";
             function handleResponse(data) {
                 parentContainer.innerHTML = data;
                 container.appendChild(parentContainer);
+                const priceSpans = document.querySelectorAll(".productPrice > span")
+                const finalePriceSpan = document.querySelector(".finale > p > span");
                 const liItems = document.querySelectorAll(".quantity");
                 const liItemsS = document.querySelectorAll(".size");
+                let price = 0;
+
                 liItems.forEach((li, index) => {
                     const valueObj = JSON.parse(userItems[0].value);
                     li.textContent += valueObj[index].quantity;
+                    price += parseInt(valueObj[index].quantity) * parseInt(priceSpans[index].textContent);
                     liItemsS[index].textContent += valueObj[index].size;
+
                 });
+                finalePriceSpan.innerText = price;
             }
         }
     });

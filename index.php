@@ -16,4 +16,5 @@ $core->setRoutes(require 'core/routes/UserRoutes.php');
 $core->setRoutes(require 'core/routes/CatalogRoutes.php');
 $core->setRoutes(require 'core/routes/CartRoutes.php');
 $core->setRoutes(require 'core/routes/PaymentRoutes.php');
+$core->setRoutes(require 'core/routes/AdminRoutes.php');
 $core->run();

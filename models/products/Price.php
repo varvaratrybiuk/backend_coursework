@@ -8,14 +8,13 @@ class Price
 {
     private float $amount;
 
-    private string $currency;
     /**
      * @throws Exception
      */
-    public function __construct(float $amount, string $currency)
+    public function __construct(float $amount)
     {
         if ($amount < 0) {
-            throw new \Exception("Price cannot be negative.");
+            throw new \Exception("Ціна не може бути від'ємною");
         }
         $this->amount = $amount;
     }
@@ -25,8 +24,4 @@ class Price
         return $this->amount;
     }
 
-    public function __toString(): string
-    {
-        return $this->amount . " " . $this->currency;
-    }
 }

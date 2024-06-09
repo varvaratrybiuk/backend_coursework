@@ -3,6 +3,7 @@
 namespace models\orders;
 
 use core\Repository;
+use models\address\Address;
 use models\products\ProductService;
 
 class OrderRepository extends Repository
@@ -32,7 +33,7 @@ class OrderRepository extends Repository
         foreach ($productInformList as $productInform) {
             $productId = $productInform->getProductId();
             $quantity = $productInform->getQuantity();
-            $size = $productInform->getSizeId();
+            $size = $productInform->getSize();
             $this->db->insert("storages", [
                 "order_id" => $orderId,
                 "product_id" => $productId,
@@ -41,6 +42,56 @@ class OrderRepository extends Repository
             ])->execute();
             $this->productService->updateProduct($productId, $quantity, $size);
         }
+    }
+    public function getAllUsersOrders(): array
+    {
+        $results = $this->db->select("orders", "CONCAT(users.name, ' ', users.lastname) AS full_name, 
+        address_information.country,
+        address_information.city,
+        address_information.street,
+        address_information.zip_code, orders.id, orders.status")
+            ->join(["users" => "id"], ["orders" => "user_id"])
+            ->join(["address_information" => "id"], ["orders" => "address_id"])
+            ->execute()
+            ->returnAssocArray();
+        $userOrders = [];
+        foreach ($results as $result) {
+            $userOrder = new UserOrder(
+                $result['full_name'],
+                (int)$result['id'],
+                (string)new Address($result['country'], $result['city'],  $result['street'], $result['zip_code']),
+                (int)$result['status']
+            );
+            $userOrders[] = $userOrder;
+        }
+        return $userOrders;
+    }
+    public function getAllOrdersProducts(): array
+    {
+        $result = $this->db->select("storages", "order_id, products.product_name, storages.quantity, storages.size")
+            ->join(["products" => "id"], ["storages"=> "product_id"])->execute()->returnAssocArray();
+        $orderProducts = [];
+        foreach ($result as $row) {
+            $orderProduct = new OrderProduct(
+                $row['order_id'],
+                $row['product_name'],
+                $row['quantity'],
+                $row['size']
+            );
+            $orderProducts[] = $orderProduct;
+        }
+
+        return $orderProducts;
+    }
+    public function getOrdersStatuses() : array
+    {
+        return $this->db->select("status")->execute()->returnAssocArray();
+    }
+    public function updateStatus(int $orderId, int $statusId): void
+    {
+        $this->db->update("orders")->set(["status"=>$statusId])
+            ->where(["id"=>$orderId])
+            ->execute();
     }
 }
 

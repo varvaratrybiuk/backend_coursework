@@ -12,6 +12,10 @@ class UserService
     {
         $this->repository = new UserRepository();
     }
+    public function isAdmin($userId):bool
+    {
+        return (bool)$this->repository->gerUserRoleId($userId)["role_id"] == '1';
+    }
     /**
      * @throws Exception
      */

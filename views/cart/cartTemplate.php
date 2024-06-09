@@ -2,7 +2,6 @@
 /** @var array $productObjs */
 /** @var float $price */
 /** @var array $data */
-$fullprice = 0;
 ?>
 <div class="row">
     <div class="col  products">
@@ -13,14 +12,13 @@ $fullprice = 0;
                     <li>Ім'я товару: "<?=$item[0]->getName()?>"</li>
                     <li class = "size">Розмір: </li>
                     <li class = "quantity">К-сть: </li>
-                    <li>Ціна: <?= $item[1]?> </li>
-                    <?php $fullprice += $item[1]?>
+                    <li class ="productPrice">Ціна: <span><?= $item[1]?></span> </li>
                 </ul>
             </div>
         <?php endforeach;?>
     </div>
     <div class="col  finale">
-        <p>Всього до сплати:  <?= $fullprice?></p>
+        <p>Всього до сплати: <span></span></p>
         <a href="http://merchua/payment" class="btn">Оформити замовлення</a>
     </div>
 </div>
