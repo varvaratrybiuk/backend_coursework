@@ -14,7 +14,7 @@ class UserService
     }
     public function isAdmin($userId):bool
     {
-        return (bool)$this->repository->gerUserRoleId($userId)["role_id"] == '1';
+        return $this->repository->gerUserRoleId($userId)["role_id"] == 1;
     }
     /**
      * @throws Exception

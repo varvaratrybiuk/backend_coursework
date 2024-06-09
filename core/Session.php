@@ -10,27 +10,32 @@ class Session
         if(session_id() == "")
             session_start();
     }
-    public function  add($key, $value): void
+
+    public function add($key, $value): void
     {
-        $_SESSION[$key][] = $value;
+        $_SESSION[$key] = $value;
     }
+
     public function get($key)
     {
         if (array_key_exists($key, $_SESSION))
-            return $_SESSION[$key][0];
+            return $_SESSION[$key];
     }
+
     public function unset(): void
     {
         unset($_SESSION['id']);
         unset($_SESSION['admin']);
     }
+
     public function userIsLoggedIn(): bool
     {
-        return (bool)$this->get('id');
+        return isset($_SESSION['id']);
     }
+
     public function userIsAdmin(): bool
     {
-        return (bool)$this->get('admin');
+        return isset($_SESSION['admin']) && $_SESSION['admin'];
     }
 
 }
