@@ -61,13 +61,13 @@ class ProductRepository extends Repository
     {
         $artist_id = $this->artistRepository->isArtistExist($artistName);
         $products = $this->getProducts($artist_id);
-        return $this->createProductDTOs($products);
+        return $this->createProductObjs($products);
     }
 
     public function findProductById(int $id): ProductObj
     {
         $product = $this->getProduct($id)[0];
-        return $this->createProductDTO($product);
+        return $this->createProductObj($product);
     }
     public function addComment(CommentAndRating $comment): void
     {
@@ -111,11 +111,11 @@ class ProductRepository extends Repository
         return $query->execute()->returnAssocArray();
     }
 
-    private function createProductDTOs(array $products): array
+    private function createProductObjs(array $products): array
     {
         $allProducts = [];
         foreach ($products as $product) {
-            $allProducts[] = $this->createProductDTO($product);
+            $allProducts[] = $this->createProductObj($product);
         }
 
         return $allProducts;
@@ -126,7 +126,7 @@ class ProductRepository extends Repository
         }
         return round(array_sum($numbers) / count($numbers), 2);
     }
-    private function createProductDTO(array $product): ProductObj
+    private function createProductObj(array $product): ProductObj
     {
         $id = $product['id'];
         $sizeAndPriceArray = $this->getSizeAndPriceArray($id);

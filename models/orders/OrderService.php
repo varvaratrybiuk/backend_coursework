@@ -22,32 +22,32 @@ class OrderService
         $this->addressService = new AddressService();
 
     }
-    public function addUserOrder(int $address_id, int $user_id, OrderObj $orderDTO): void
+    public function addUserOrder(int $address_id, int $user_id, OrderObj $orderObj): void
     {
-        $orderDTO->setUserId($user_id);
-        $orderDTO->setAddressId($address_id);
-        $this->saveOrder($orderDTO);
+        $orderObj->setUserId($user_id);
+        $orderObj->setAddressId($address_id);
+        $this->saveOrder($orderObj);
     }
-    private function saveOrder(OrderObj $orderDTO): void
+    private function saveOrder(OrderObj $orderObj): void
     {
-        $date = new Date($orderDTO->getOrderDate());
-        $order = new Order($orderDTO->getUserId(), $date, $orderDTO->getAddressId());
+        $date = new Date($orderObj->getOrderDate());
+        $order = new Order($orderObj->getUserId(), $date, $orderObj->getAddressId());
         $orderId = $this->repository->saveOrder($order);
-        $orderDTO->setOrderId((int)$orderId);
-        $this->repository->saveProductAndQuantity($orderDTO);
+        $orderObj->setOrderId((int)$orderId);
+        $this->repository->saveProductAndQuantity($orderObj);
     }
 
     /**
      * @throws \Exception
      */
-    public function addGuestOrder(UserObj $userDTO, OrderObj $orderDTO, AddressObj $addressDTO): void
+    public function addGuestOrder(UserObj $userObj, OrderObj $orderObj, AddressObj $addressObj): void
     {
-        $user_id = $this->service->findUserIdByEmail($userDTO->email);
+        $user_id = $this->service->findUserIdByEmail($userObj->email);
         if($user_id == null)
-            $user_id = $this->service->register($userDTO);
-        $orderDTO->setUserId($user_id);
-        $orderDTO->setAddressId($this->addressService->addAddress($addressDTO, $user_id));
-        $this->saveOrder($orderDTO);
+            $user_id = $this->service->register($userObj);
+        $orderObj->setUserId($user_id);
+        $orderObj->setAddressId($this->addressService->addAddress($addressObj, $user_id));
+        $this->saveOrder($orderObj);
     }
     public function getAllUsersOrders(): array
     {

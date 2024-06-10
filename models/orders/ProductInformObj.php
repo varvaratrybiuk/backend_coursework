@@ -2,7 +2,7 @@
 
 namespace models\orders;
 
-class ProductInformDTO
+class ProductInformObj
 {
     private int $productId;
     private int $quantity;

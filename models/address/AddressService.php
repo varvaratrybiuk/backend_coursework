@@ -9,9 +9,9 @@ class AddressService
     {
         $this->repository = new AddressRepository();
     }
-    public function addAddress(AddressObj $dto, int $userId): int
+    public function addAddress(AddressObj $obj, int $userId): int
     {
-        $address = new Address($dto->country,$dto->city,$dto->street, $dto->zipCode);
+        $address = new Address($obj->country,$obj->city,$obj->street, $obj->zipCode);
         return $this->repository->save(new AddressInformation($address, $userId));
     }
     public function findByUserId(int $userId): array

@@ -9,7 +9,7 @@ use models\address\AddressObj;
 use models\address\AddressService;
 use models\orders\OrderObj;
 use models\orders\OrderService;
-use models\orders\ProductInformDTO;
+use models\orders\ProductInformObj;
 use models\users\UserObj;
 use models\users\UserService;
 
@@ -45,14 +45,14 @@ class PaymentController extends BaseController
         $userData = json_decode(Request::getPost("json"), true);
         $productInformList = $this->createProductInformList($userData);
         $orderDate = date('Y-m-d');
-        $orderDTO = new OrderObj($orderDate, $productInformList);
+        $orderObj = new OrderObj($orderDate, $productInformList);
 
         try {
             if (!Core::getInstance()->getCurrentSession()->userIsLoggedIn()) {
-                $this->processGuestOrder($orderDTO);
+                $this->processGuestOrder($orderObj);
             } else {
                 $addressId = $this->getAddressId($userId);
-                $this->orderService->addUserOrder($addressId, $userId, $orderDTO);
+                $this->orderService->addUserOrder($addressId, $userId, $orderObj);
             }
         } catch (\Exception $e) {
             $this->view->renderJson(["error" => $e->getMessage()]);
@@ -67,7 +67,7 @@ class PaymentController extends BaseController
         foreach ($userData as $item) {
             $decodedItem = json_decode($item['value'], true);
             foreach ($decodedItem as $item){
-                $productInformList[] = new ProductInformDTO($item["id"], $item["quantity"], $item["size"]);
+                $productInformList[] = new ProductInformObj($item["id"], $item["quantity"], $item["size"]);
             }
         }
         return $productInformList;
@@ -77,13 +77,13 @@ class PaymentController extends BaseController
     {
         $addressId = Request::getPost('addressId');
         if (empty($addressId)) {
-            $addressDTO = $this->getAddressDTO();
+            $addressDTO = $this->getAddressObj();
             if(Core::getInstance()->getCurrentSession()->userIsLoggedIn())
                 $addressId = $this->addressService->addAddress($addressDTO, $userId);
         }
         return $addressId;
     }
-    private function getAddressDTO(): AddressObj
+    private function getAddressObj(): AddressObj
     {
         $country = Request::getPost('country');
         $city = Request::getPost('city');
@@ -94,7 +94,7 @@ class PaymentController extends BaseController
     /**
      * @throws \Exception
      */
-    private function processGuestOrder($orderDTO): void
+    private function processGuestOrder($orderObj): void
     {
         $firstName = Request::getPost('first_name');
         $lastName = Request::getPost('last_name');
@@ -107,7 +107,7 @@ class PaymentController extends BaseController
             null,
             3
         );
-        $addressDTO = $this->getAddressDTO();
-        $this->orderService->addGuestOrder($newUser, $orderDTO,  $addressDTO);
+        $addressObj = $this->getAddressObj();
+        $this->orderService->addGuestOrder($newUser, $orderObj,  $addressObj);
     }
 }

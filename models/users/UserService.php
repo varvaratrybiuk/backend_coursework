@@ -19,9 +19,9 @@ class UserService
     /**
      * @throws Exception
      */
-    public function register(UserObj $userDTO): int
+    public function register(UserObj $userObj): int
     {
-        $user = $this->createUserFromDTO($userDTO);
+        $user = $this->createUserFromObj($userObj);
         return $this->saveUser($user);
     }
     /**
@@ -54,21 +54,21 @@ class UserService
     /**
      * @throws Exception
      */
-    public function updateUser(int $id, UserObj $userDTO): void
+    public function updateUser(int $id, UserObj $userObj): void
     {
-        $user = $this->createUserFromDTO($userDTO);
+        $user = $this->createUserFromObj($userObj);
         $user->setId($id);
         $this->repository->updateUser($user);
     }
     /**
      * @throws Exception
      */
-    private function createUserFromDTO(UserObj $userDTO): User
+    private function createUserFromObj(UserObj $userObj): User
     {
-        $validEmail = new Email($userDTO->email);
-        $validPassword = $userDTO->password != null ? new Password($userDTO->password) : null;
-        $validBirthday = $userDTO->birthday != null ? new Birthday($userDTO->birthday) : null;
-        return new User($validEmail, $validPassword, $userDTO->name, $userDTO->lastname, $validBirthday, $userDTO->role_id);
+        $validEmail = new Email($userObj->email);
+        $validPassword = $userObj->password != null ? new Password($userObj->password) : null;
+        $validBirthday = $userObj->birthday != null ? new Birthday($userObj->birthday) : null;
+        return new User($validEmail, $validPassword, $userObj->name, $userObj->lastname, $validBirthday, $userObj->role_id);
     }
     public function findUserIdByEmail(string $email)
     {
