@@ -18,6 +18,7 @@ class ProductVariantRepository extends Repository
                 "product_quantity"=> $productVariant->getProductQuantity(),
                 "price"=> $productVariant->getPrice()])->execute();
     }
+
     public function updateProductsVariant(array $data): void
     {
         foreach ($data as $index =>$item){
@@ -34,7 +35,6 @@ class ProductVariantRepository extends Repository
                     ->join(["sizes"=> "id"], ["product_variants" => "size_id"])
                     ->set(["price" => $item['price']])
                     ->where(["product_id" => $index, "size"=> $item["size"]])->execute();
-                echo "tET";
                 continue;
             }
             $this->db->update("product_variants")

@@ -41,7 +41,7 @@ class Router
         $uri = '/' . (filter_input(INPUT_GET, 'route') ?? '');
         $method = $_SERVER['REQUEST_METHOD'];
         $route = $this->matchRoute($uri, $method);
-        if (!$route || !$this->isRouteExist($route)) {
+        if (!$route || !$this->isControllerExist($route)) {
             $error = new ErrorController();
             $error->errorPage(404);
         }
@@ -53,7 +53,7 @@ class Router
         $methodName = $route["route"]['method'];
         return [$controllerName, $methodName];
     }
-    private function isRouteExist(array $route): bool
+    private function isControllerExist(array $route): bool
     {
         [$controllerName, $methodName] = $this->getControllerAndMethod($route);
         return class_exists($controllerName) && method_exists($controllerName, $methodName);
@@ -73,7 +73,7 @@ class Router
         }
         catch (\Throwable $e) {
             $error = new ErrorController();
-            $error->errorPage(500);
+            $error->errorPage(404);
         }
     }
     private function matchRoute(string $uri, string $method): ?array

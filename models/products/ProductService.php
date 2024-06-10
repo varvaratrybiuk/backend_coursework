@@ -18,8 +18,7 @@ class ProductService
     {
         $commentObj = new CommentAndRating($userId, $productId, $comment, $rating);
         $this->productRepository->addComment($commentObj);
-        $comments = $this->getProductById($productId)->getRatingAndComments();
-        return $comments;
+        return $this->getProductById($productId)->getRatingAndComments();
     }
     public function getAllProducts(string $artistName = null): array
     {
@@ -53,18 +52,42 @@ class ProductService
     }
     public function saveProductAndPhotos(int $artist_id, string $name, string $description, array $photos): void
     {
+        if($artist_id == 0 || $photos == []){
+            throw new \Exception("Перевірте чи все заповнили");
+        }
         $product = new Product($artist_id,  $name,  $description);
         $id = $this->productRepository->save($product);
         $this->photosRepository->savePhotos($id, $photos);
     }
+
+    /**
+     * @throws \Exception
+     */
     public function addVariants(int $productId, int $sizeId, int $productQuantity, float $price): void
     {
         $validPrice = new Price($price);
+        if($productId == 0 || $sizeId == 0 ){
+            throw new \Exception("Ви не все обрали");
+        }
         $productVariant = new ProductVariant($productId, $sizeId, $productQuantity,  $validPrice);
         $this->variantRepository->saveVariant($productVariant);
     }
+
+    /**
+     * @throws \Exception
+     */
     public  function updateVariants(array $data)
     {
+        foreach ($data as $item){
+            if (isset($item['price'])) {
+                new Price($item["price"]);
+            }
+            if (isset($item['quantity'])) {
+                if ($item["quantity"] < 0) {
+                    throw new \Exception("К-сть не можу бути ві'дємною");
+                }
+            }
+        }
         $this->variantRepository->updateProductsVariant($data);
     }
 }

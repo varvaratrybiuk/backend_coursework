@@ -4,6 +4,7 @@
 <div class="row container-fluid">
     <div class="col-auto mb-5">
         <button type="submit" id="update">Оновити</button>
+        <div class ="error mt-2" style="color: darkred;"></div>
     </div>
     <div class="col-auto table-container">
         <table class="table">
@@ -24,14 +25,16 @@
                             <?php foreach ($product->getPricesAndSizes() as  $inform): ?>
                                 <li id="<?=$inform["size"]?>">
                                     <?=$inform["size"]?>:
+
                                     <ul id="<?=$product->getId()?>" class ="box">
+
                                         <li>
                                             <label for="price<?=$index.$inform["size"]?>">Ціна:</label>
-                                            <input type="text" class ="price" id="price<?=$index.$inform["size"]?>"value="<?=$inform["price"]?>" required>
+                                            <input type="text" name ="price" class ="price" id="price<?=$index.$inform["size"]?>"value="<?=$inform["price"]?>" required>
                                         </li>
                                         <li>
                                             <label for="quantity<?=$index.$inform["size"]?>">К-сть на складі:</label>
-                                            <input type="text" class ="quantity" id="quantity<?=$index.$inform["size"]?>"  value="<?=$inform["quantity"]?>" required>
+                                            <input type="text" name="quantity"class ="quantity" id="quantity<?=$index.$inform["size"]?>"  value="<?=$inform["quantity"]?>" required>
                                         </li>
                                     </ul>
                                 </li>
@@ -51,13 +54,13 @@
         const quantityInputs = document.querySelectorAll('.quantity');
         const data = {};
         const updateButton = document.getElementById("update");
-
+        const errorBox = document.querySelector(".error")
+        console.log(errorBox);
         priceInputs.forEach((input) => {
             input.addEventListener('change', function() {
                 const ul = input.closest('.box');
                 const ulId = ul.id;
                 const size = ul.closest('li').id;
-
                 data[ulId] = data[ulId] || {};
                 data[ulId].price = input.value;
                 data[ulId].size = size;
@@ -88,9 +91,12 @@
                 body: formData
             };
             fetch(window.location.href, requestOptions)
-                .then(response => response.text())
+                .then(response => response.json())
                 .then(data => {
-                    location.reload()
+                    if(data.done === true){
+                        location.reload()
+                    }
+                    errorBox.textContent = data.error;
                 })
                 .catch(error => {
                     console.error('Помилка:', error);

@@ -34,6 +34,7 @@
     <div class="col auto">
         <div class="container-md form-container">
             <h2>Форма додавання товару</h2>
+            <div class="errorProduct" style="color: darkred;"></div>
             <form id="productForm" method="POST" class="productForm">
                 <div class="row g-1 form-field">
                     <div class="col auto">
@@ -88,6 +89,7 @@
 
         <div class="container-md form-container">
             <h2>Форма додавання варіанту товару</h2>
+            <div class="errorVariant" style="color: darkred;"></div>
             <form id="variantForm" method="POST" class="variantForm">
                 <div class="row g-1 form-field">
                     <div class="col auto">
@@ -152,14 +154,17 @@
     let variantAdded = false;
     const productForm = document.getElementById("productForm");
     const variantForm = document.getElementById("variantForm");
+    let errorBox = null;
 
     productForm.addEventListener("submit", (event) => {
         event.preventDefault();
+        errorBox  = document.querySelector(".errorProduct")
         sendData(productForm);
     });
 
     variantForm.addEventListener("submit", (event) => {
         event.preventDefault();
+        errorBox  = document.querySelector(".errorVariant")
         sendData(variantForm);
     });
 
@@ -171,9 +176,13 @@
         };
         console.log(window.location.href + `/${form.id}`);
         fetch(window.location.href + `/${form.id}`, requestOptions)
-            .then(response => response.text())
+            .then(response => response.json())
             .then(data => {
-                location.reload();
+                if(data.done === true){
+                    console.log(data)
+                    location.reload();
+                }
+                errorBox.textContent = data.error
             })
             .catch(error => {
                 console.error('Помилка:', error);

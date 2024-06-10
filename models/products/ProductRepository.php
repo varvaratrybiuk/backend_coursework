@@ -31,7 +31,7 @@ class ProductRepository extends Repository
     {
         $artist_id = $this->artistRepository->isArtistExist($artistName);
         $products = $this->getProducts($artist_id);
-        $dtos = $this->createProductDTOs($products);
+        $dtos = $this->createProductObjs($products);
         $sortOptions = ['ASC', 'DESC'];
         if (in_array($sortByPrice, $sortOptions) || in_array($sortByRating, $sortOptions)) {
             usort($dtos, function($a, $b) use ($sortByPrice, $sortByRating, $sortOptions) {

@@ -59,7 +59,12 @@ class AdminController extends BaseController
     public function actionUpdateProduct(): void
     {
         $productData = json_decode(Request::getPost("json"), true);
-        $this->productService->updateVariants($productData);
+        try{
+            $this->productService->updateVariants($productData);
+            $this->view->renderJson(["done" => "true"]);
+        }catch (\Exception $e){
+            $this->view->renderJson(["error" => $e->getMessage()]);
+        }
     }
     //Додати продукт
     public function showAddProduct(): void
@@ -85,7 +90,13 @@ class AdminController extends BaseController
         $sizeId = $data["size"];
         $quantity = $data["quantity"];
         $price = $data["price"];
-        $this->productService->addVariants($productId, $sizeId, $quantity, $price);
+        try{
+            $this->productService->addVariants($productId, $sizeId, $quantity, $price);
+            $this->view->renderJson(["done" => true]);
+        }catch (\Exception $e){
+           $this->view->renderJson(["error" => $e->getMessage()]);
+        }
+
     }
 
     private function processingProductForm(array $data): void
@@ -94,7 +105,12 @@ class AdminController extends BaseController
         $description = $data["description"];
         $photos = $this->processingPhotos($name);
         $artist = $data["artist"];
-        $this->productService->saveProductAndPhotos($artist, $name, $description, $photos);
+        try{
+            $this->productService->saveProductAndPhotos($artist, $name, $description, $photos);
+            $this->view->renderJson(["done" => true]);
+        }catch (\Exception $e){
+            $this->view->renderJson(["error" => $e->getMessage()]);
+        }
     }
     private function processingPhotos(string $name): array
     {
