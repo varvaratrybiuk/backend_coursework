@@ -19,6 +19,7 @@ class AdminController extends BaseController
     public function __construct()
     {
         parent::__construct();
+        $this->isAdmin();
         $this->productService = new ProductService();
         $this->artistRepository = new ArtistRepository();
         $this->sizeRepository = new SizeRepository();
@@ -27,7 +28,7 @@ class AdminController extends BaseController
     }
     private function isAdmin(): void
     {
-        if(Core::getInstance()->getCurrentSession())
+        if(!Core::getInstance()->getCurrentSession()->userIsAdmin())
             header("Location: /");
     }
     //Зміна замовлення

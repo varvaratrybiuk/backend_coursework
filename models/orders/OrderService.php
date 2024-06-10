@@ -42,7 +42,9 @@ class OrderService
      */
     public function addGuestOrder(UserDTO $userDTO, OrderDTO $orderDTO, AddressDTO $addressDTO): void
     {
-        $user_id =  $this->service->register($userDTO);
+        $user_id = $this->service->findUserIdByEmail($userDTO->email);
+        if($user_id == null)
+            $user_id = $this->service->register($userDTO);
         $orderDTO->setUserId($user_id);
         $orderDTO->setAddressId($this->addressService->addAddress($addressDTO, $user_id));
         $this->saveOrder($orderDTO);

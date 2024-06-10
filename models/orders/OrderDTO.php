@@ -8,14 +8,12 @@ class OrderDTO
     private int $userId;
     private int $addressId;
     private string $orderDate;
-    private ?string $status;
     private array $productInform;
 
-    public function __construct(string $orderDate, array $productInform, string $status = null)
+    public function __construct(string $orderDate, array $productInform)
     {
         $this->orderDate = $orderDate;
         $this->productInform = $productInform;
-        $this->status = $status;
     }
     public function setAddressId(int $addressId): void
     {
@@ -51,10 +49,6 @@ class OrderDTO
         return $this->orderDate;
     }
 
-    public function getStatus(): string
-    {
-        return $this->status;
-    }
 
     public function getProductInform(): array
     {

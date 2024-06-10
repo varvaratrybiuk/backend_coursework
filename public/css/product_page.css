@@ -154,7 +154,6 @@ body {
 .add-comment .card-body .form input[type=range] {
   width: min-content;
   cursor: pointer;
-  appearance: none;
   height: 8px;
   border-radius: 4px;
   background: #f6f5f2;

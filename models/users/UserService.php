@@ -70,5 +70,10 @@ class UserService
         $validBirthday = $userDTO->birthday != null ? new Birthday($userDTO->birthday) : null;
         return new User($validEmail, $validPassword, $userDTO->name, $userDTO->lastname, $validBirthday, $userDTO->role_id);
     }
-
+    public function findUserIdByEmail(string $email)
+    {
+        $email = new Email($email);
+        $user = $this->repository->findByEmail(new User($email));
+        return $user ? $user[0]["id"] : null;
+    }
 }

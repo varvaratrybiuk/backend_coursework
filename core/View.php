@@ -29,8 +29,7 @@ class View
     {
         $content = $this->getHTML($path, $data);
         if ($content === false) {
-            echo "Template not found: $path";
-            return;
+            throw new \Exception("Не знайдено шаблон");
         }
         echo $this->getHTML("views/layouts/index.php", ['Title' => $title,
             'Content' => $content,
@@ -45,8 +44,7 @@ class View
     {
         $content = $this->getHTML($path, $data);
         if ($content === false) {
-            echo "Template not found: $path";
-            return;
+            throw new \Exception("Не знайдено шаблон");
         }
         echo $content;
     }

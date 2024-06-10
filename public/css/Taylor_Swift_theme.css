@@ -143,7 +143,7 @@ body {
   flex: 1;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(288px, 1fr));
-  grid-gap: 1rem;
+  grid-gap: 16px;
 }
 
 /*# sourceMappingURL=Taylor_Swift_theme.css.map */
