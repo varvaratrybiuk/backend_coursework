@@ -2,7 +2,7 @@
 
 namespace models\products;
 
-class ProductDTO
+class ProductObj
 {
     private ?int $id;
     private string $name;

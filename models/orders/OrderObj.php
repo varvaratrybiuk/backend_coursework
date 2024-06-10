@@ -2,7 +2,7 @@
 
 namespace models\orders;
 
-class OrderDTO
+class OrderObj
 {
     private int $orderId;
     private int $userId;

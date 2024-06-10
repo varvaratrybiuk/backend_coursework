@@ -2,7 +2,7 @@
 
 namespace models\address;
 
-class AddressDTO
+class AddressObj
 {
     public string $country;
     public string $city;

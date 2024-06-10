@@ -2,10 +2,10 @@
 
 namespace models\orders;
 
-use models\address\AddressDTO;
+use models\address\AddressObj;
 use models\address\AddressService;
 use models\Date;
-use models\users\UserDTO;
+use models\users\UserObj;
 use models\users\UserService;
 
 class OrderService
@@ -22,13 +22,13 @@ class OrderService
         $this->addressService = new AddressService();
 
     }
-    public function addUserOrder(int $address_id, int $user_id, OrderDTO $orderDTO): void
+    public function addUserOrder(int $address_id, int $user_id, OrderObj $orderDTO): void
     {
         $orderDTO->setUserId($user_id);
         $orderDTO->setAddressId($address_id);
         $this->saveOrder($orderDTO);
     }
-    private function saveOrder(OrderDTO $orderDTO): void
+    private function saveOrder(OrderObj $orderDTO): void
     {
         $date = new Date($orderDTO->getOrderDate());
         $order = new Order($orderDTO->getUserId(), $date, $orderDTO->getAddressId());
@@ -40,7 +40,7 @@ class OrderService
     /**
      * @throws \Exception
      */
-    public function addGuestOrder(UserDTO $userDTO, OrderDTO $orderDTO, AddressDTO $addressDTO): void
+    public function addGuestOrder(UserObj $userDTO, OrderObj $orderDTO, AddressObj $addressDTO): void
     {
         $user_id = $this->service->findUserIdByEmail($userDTO->email);
         if($user_id == null)

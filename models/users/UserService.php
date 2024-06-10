@@ -19,7 +19,7 @@ class UserService
     /**
      * @throws Exception
      */
-    public function register(UserDTO $userDTO): int
+    public function register(UserObj $userDTO): int
     {
         $user = $this->createUserFromDTO($userDTO);
         return $this->saveUser($user);
@@ -54,7 +54,7 @@ class UserService
     /**
      * @throws Exception
      */
-    public function updateUser(int $id, UserDTO $userDTO): void
+    public function updateUser(int $id, UserObj $userDTO): void
     {
         $user = $this->createUserFromDTO($userDTO);
         $user->setId($id);
@@ -63,7 +63,7 @@ class UserService
     /**
      * @throws Exception
      */
-    private function createUserFromDTO(UserDTO $userDTO): User
+    private function createUserFromDTO(UserObj $userDTO): User
     {
         $validEmail = new Email($userDTO->email);
         $validPassword = $userDTO->password != null ? new Password($userDTO->password) : null;

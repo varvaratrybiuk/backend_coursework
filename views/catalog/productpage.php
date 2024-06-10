@@ -1,8 +1,8 @@
 <?php
-/** @var ProductDTO $productObject */
+/** @var ProductObj $productObject */
 
 use core\Core;
-use models\products\ProductDTO;
+use models\products\ProductObj;
 $user_id = Core::getInstance()->getCurrentSession()->userIsLoggedIn() ? Core::getInstance()->getCurrentSession()->get("id") : "guest";
 $pricesAndSizes = $productObject->getPricesAndSizes();
 $pricesAndSizesJSON = json_encode($pricesAndSizes);

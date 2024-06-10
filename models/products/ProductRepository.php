@@ -64,7 +64,7 @@ class ProductRepository extends Repository
         return $this->createProductDTOs($products);
     }
 
-    public function findProductById(int $id): ProductDTO
+    public function findProductById(int $id): ProductObj
     {
         $product = $this->getProduct($id)[0];
         return $this->createProductDTO($product);
@@ -126,13 +126,13 @@ class ProductRepository extends Repository
         }
         return round(array_sum($numbers) / count($numbers), 2);
     }
-    private function createProductDTO(array $product): ProductDTO
+    private function createProductDTO(array $product): ProductObj
     {
         $id = $product['id'];
         $sizeAndPriceArray = $this->getSizeAndPriceArray($id);
         $photosArray = $this->photosRepository->getPhotosArray($id);
         $commentsAndRating = $this->getRatingAndComments($id);
-        $finaleProduct = new ProductDTO(
+        $finaleProduct = new ProductObj(
             $product['product_name'],
             $sizeAndPriceArray,
             $product['description'],

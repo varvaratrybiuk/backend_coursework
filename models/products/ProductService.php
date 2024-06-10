@@ -29,7 +29,7 @@ class ProductService
     {
         return $this->productRepository->sortByDefinition($artistName, $sortByPrice, $sortByRating);
     }
-    public function getProductById(int $id): ProductDTO
+    public function getProductById(int $id): ProductObj
     {
         return $this->productRepository->findProductById($id);
     }

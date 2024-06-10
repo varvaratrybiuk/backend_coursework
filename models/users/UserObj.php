@@ -2,7 +2,7 @@
 
 namespace models\users;
 
-class UserDTO
+class UserObj
 {
     public string $email;
     public ?int $role_id;

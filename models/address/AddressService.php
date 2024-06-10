@@ -9,7 +9,7 @@ class AddressService
     {
         $this->repository = new AddressRepository();
     }
-    public function addAddress(AddressDTO $dto, int $userId): int
+    public function addAddress(AddressObj $dto, int $userId): int
     {
         $address = new Address($dto->country,$dto->city,$dto->street, $dto->zipCode);
         return $this->repository->save(new AddressInformation($address, $userId));

@@ -5,12 +5,12 @@ namespace controllers;
 use core\BaseController;
 use core\Core;
 use core\Request;
-use models\address\AddressDTO;
+use models\address\AddressObj;
 use models\address\AddressService;
-use models\orders\OrderDTO;
+use models\orders\OrderObj;
 use models\orders\OrderService;
 use models\orders\ProductInformDTO;
-use models\users\UserDTO;
+use models\users\UserObj;
 use models\users\UserService;
 
 class PaymentController extends BaseController
@@ -45,7 +45,7 @@ class PaymentController extends BaseController
         $userData = json_decode(Request::getPost("json"), true);
         $productInformList = $this->createProductInformList($userData);
         $orderDate = date('Y-m-d');
-        $orderDTO = new OrderDTO($orderDate, $productInformList);
+        $orderDTO = new OrderObj($orderDate, $productInformList);
 
         try {
             if (!Core::getInstance()->getCurrentSession()->userIsLoggedIn()) {
@@ -83,13 +83,13 @@ class PaymentController extends BaseController
         }
         return $addressId;
     }
-    private function getAddressDTO(): AddressDTO
+    private function getAddressDTO(): AddressObj
     {
         $country = Request::getPost('country');
         $city = Request::getPost('city');
         $street = Request::getPost('street');
         $zipCode = Request::getPost('zip_code');
-        return new AddressDTO($country, $city, $street, $zipCode);
+        return new AddressObj($country, $city, $street, $zipCode);
     }
     /**
      * @throws \Exception
@@ -99,7 +99,7 @@ class PaymentController extends BaseController
         $firstName = Request::getPost('first_name');
         $lastName = Request::getPost('last_name');
         $email = Request::getPost('email');
-        $newUser = new UserDTO(
+        $newUser = new UserObj(
             $email,
             null,
             $firstName,

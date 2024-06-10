@@ -25,7 +25,7 @@ class OrderRepository extends Repository
         )->execute();
         return $this->db->lastInsertId();
     }
-    public function saveProductAndQuantity(OrderDTO $orderInform): void
+    public function saveProductAndQuantity(OrderObj $orderInform): void
     {
         $orderId = $orderInform->getOrderId();
         $productInformList = $orderInform->getProductInform();

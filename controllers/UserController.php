@@ -5,9 +5,9 @@ namespace controllers;
 use core\BaseController;
 use core\Core;
 use core\Request;
-use models\address\AddressDTO;
+use models\address\AddressObj;
 use models\address\AddressService;
-use models\users\UserDTO;
+use models\users\UserObj;
 use models\users\UserService;
 
 class UserController extends BaseController
@@ -74,7 +74,7 @@ class UserController extends BaseController
     {
         $this->tryCatchWrapper(function () {
             $registrationData = Request::getPost();
-            $newUser = new UserDTO(
+            $newUser = new UserObj(
                 $registrationData['regemail'],
                 $registrationData['regpassword'],
                 $registrationData['regname'],
@@ -117,7 +117,7 @@ class UserController extends BaseController
         $this->auth();
         $this->tryCatchWrapper(function () {
             $user_id = Core::getInstance()->getCurrentSession()->get("id");
-            $updateData = new UserDTO(
+            $updateData = new UserObj(
                 Request::getPost('edit_email') ?? '',
                 '',
                 Request::getPost('edit_name') ?? '',
@@ -134,7 +134,7 @@ class UserController extends BaseController
         $this->auth();
         $this->tryCatchWrapper(function () {
             $user_id = Core::getInstance()->getCurrentSession()->get("id");
-            $address = new AddressDTO(
+            $address = new AddressObj(
                 Request::getPost('country'),
                 Request::getPost('city'),
                 Request::getPost('edit_street'),
